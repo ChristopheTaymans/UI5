@@ -1,0 +1,45 @@
+
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+
+ 	<Table	id="DomainsList"
+			items="{ path: 'Domains>/'}" 
+			mode="SingleSelectMaster"
+            selectionChange="_onItemPress"
+		    busyIndicatorDelay="10"
+		    enableBusyIndicator="true">
+		<columns>
+			<Column>							
+				<Label text="{i18n>STATUS}" design="Bold" />
+			</Column>
+			<Column>
+				<Label text="{i18n>SKILL}"  design="Bold" />
+			</Column>
+			<Column>
+				<Label text="{i18n>DEVNBR}"  design="Bold" />
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem>
+               <Image
+                    src="{
+						path: 'Domains>Missdev',
+						formatter: '.getIcon'						
+						}"	
+					densityAware="false"
+					width='15%' >
+					<layoutData>
+						<FlexItemData growFactor="1" />
+					</layoutData>
+				</Image>
+				<ObjectIdentifier
+						title="{Domains>ShortDesc}"
+						text="{Domains>Dname}"/>	
+				<ObjectNumber		
+				number="{Domains>Devnbr}"				
+				state="{= ${Domains>Devnbr} === 0 ? 'Error' : 'Success' }" />	
+			</ColumnListItem>
+		</items>
+	</Table>	
+</core:FragmentDefinition>

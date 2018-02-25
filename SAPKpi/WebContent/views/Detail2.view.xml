@@ -1,0 +1,238 @@
+<mvc:View
+        xmlns:core="sap.ui.core" 
+		xmlns:mvc="sap.ui.core.mvc" 
+		xmlns="sap.m"
+		xmlns:t="sap.ui.table"
+		controllerName="SAPKpi.Application.controllers.Detail2" 
+		xmlns:html="http://www.w3.org/1999/xhtml">
+
+<Page title="{i18n>DETAIL_TITLE}"
+	  showNavButton="{DEVICE>/system/phone}"
+	  navButtonPress="onNavButtonPress"  
+	  enableScrolling="false"
+	  class="sapUiContentPadding">
+	  	<headerContent>
+			<Button icon='sap-icon://line-chart'
+			        press="_onChart"/>					
+		</headerContent>		
+		<content>		
+		<t:Table selectionMode="None"
+				rows="{ path: 'Measure>/',
+						sorter: [
+							{
+								path: 'Measure>Month',
+								descending: true								
+							},
+							 {
+								path: 'Measure>Entity',
+								descending: true								
+							}	
+						]						
+			}" 
+				visibleRowCount="2"
+				fixedColumnCount="2">
+				<t:toolbar>
+					<Toolbar>
+						<Title text="{DescText}" level='H2'></Title>
+					</Toolbar>
+				</t:toolbar>
+				<t:columns>
+					<t:Column width="5rem">
+						<Label text="{i18n>ENTITY}" design="Bold" />
+						<t:template>
+							<Text text="{Measure>Entity}"/>
+						</t:template>
+                    </t:Column>						
+					<t:Column width="5rem">
+						<Label text="{i18n>UNIT}" design="Bold" />
+						<t:template>
+							<Text text="{MeasUnit}"/>
+						</t:template>						
+					</t:Column>
+					<t:Column width="8rem">
+						<Label text="{Calendar>/Month1}" design="Bold"  />
+						<t:template>
+							<ObjectNumber number="{ path: 'Measure>Measure1',
+												 	type: 'sap.ui.model.type.Float',  
+									   				formatOptions: {  
+									   						groupingEnabled: true,
+									   						decimals: 2,
+									   						groupingSeparator : '.',
+									   						decimalSeparator : ','
+									   					}
+													  }"	
+							             state="{Measure>State1}"/>
+						</t:template>
+					</t:Column>
+					<t:Column width="8rem">
+						<Label text="{Calendar>/Month2}" design="Bold"  />
+						<t:template>
+							<ObjectNumber number="{ path: 'Measure>Measure2',
+												 	type: 'sap.ui.model.type.Float',  
+									   				formatOptions: {  
+									   						groupingEnabled: true,
+									   						decimals: 2,
+									   						groupingSeparator : '.',
+									   						decimalSeparator : ','
+									   					}
+													  }"
+										  state="{Measure>State2}"/>
+						</t:template>
+					</t:Column>			
+					<t:Column width="8rem">
+						<Label text="{Calendar>/Month3}" design="Bold"  />
+						<t:template>
+							<ObjectNumber number="{ path: 'Measure>Measure3',
+												 	type: 'sap.ui.model.type.Float',  
+									   				formatOptions: {  
+									   						groupingEnabled: true,
+									   						decimals: 2,
+									   						groupingSeparator : '.',
+									   						decimalSeparator : ','
+									   					}
+													  }"
+										  state="{Measure>State3}"/>
+						</t:template>
+					</t:Column>	
+					<t:Column	width="11rem"					
+						resizable="true"
+						autoResizable="true">
+						<Label text="{Calendar>/Month4}" design="Bold"  />
+						<t:template>
+							<ObjectNumber number="{ path: 'Measure>Measure4',
+												 	type: 'sap.ui.model.type.Float',  
+									   				formatOptions: {  
+									   						groupingEnabled: true,
+									   						decimals: 2,
+									   						groupingSeparator : '.',
+									   						decimalSeparator : ','
+									   					}
+													  }"
+										  state="{Measure>State4}"/>
+						</t:template>
+					</t:Column>	
+					<t:Column width="8rem">
+						<Label text="{Calendar>/Month5}" design="Bold"  />
+						<t:template>
+							<ObjectNumber number="{ path: 'Measure>Measure5',
+												 	type: 'sap.ui.model.type.Float',  
+									   				formatOptions: {  
+									   						groupingEnabled: true,
+									   						decimals: 2,
+									   						groupingSeparator : '.',
+									   						decimalSeparator : ','
+									   					}
+													  }"
+										  state="{Measure>State5}"/>
+						</t:template>
+					</t:Column>	
+					<t:Column width="8rem">
+						<Label text="{Calendar>/Month6}" design="Bold"  />
+						<t:template>
+							<ObjectNumber number="{ path: 'Measure>Measure6',
+												 	type: 'sap.ui.model.type.Float',  
+									   				formatOptions: {  
+									   						groupingEnabled: true,
+									   						decimals: 2,
+									   						groupingSeparator : '.',
+									   						decimalSeparator : ','
+									   					}
+													  }"
+										  state="{Measure>State6}"/>
+						</t:template>
+					</t:Column>	
+					<t:Column width="8rem">
+						<Label text="{Calendar>/Month7}" design="Bold"  />
+						<t:template>
+							<ObjectNumber number="{ path: 'Measure>Measure7',
+												 	type: 'sap.ui.model.type.Float',  
+									   				formatOptions: {  
+									   						groupingEnabled: true,
+									   						decimals: 2,
+									   						groupingSeparator : '.',
+									   						decimalSeparator : ','
+									   					}
+													  }"
+										  state="{Measure>State7}"/>
+						</t:template>
+					</t:Column>		
+					<t:Column width="8rem">
+						<Label text="{Calendar>/Month8}" design="Bold"  />
+						<t:template>
+							<ObjectNumber number="{ path: 'Measure>Measure8',
+												 	type: 'sap.ui.model.type.Float',  
+									   				formatOptions: {  
+									   						groupingEnabled: true,
+									   						decimals: 2,
+									   						groupingSeparator : '.',
+									   						decimalSeparator : ','
+									   					}
+													  }"
+										  state="{Measure>State8}"/>
+						</t:template>
+					</t:Column>	
+				   <t:Column width="8rem">
+						<Label text="{Calendar>/Month9}" design="Bold"  />
+						<t:template>
+							<ObjectNumber number="{ path: 'Measure>Measure9',
+												 	type: 'sap.ui.model.type.Float',  
+									   				formatOptions: {  
+									   						groupingEnabled: true,
+									   						decimals: 2,
+									   						groupingSeparator : '.',
+									   						decimalSeparator : ','
+									   					}
+													  }"
+										  state="{Measure>State9}"/>
+						</t:template>
+					</t:Column>	
+					<t:Column width="8rem">
+						<Label text="{Calendar>/Month10}" design="Bold"  />
+						<t:template>
+							<ObjectNumber number="{ path: 'Measure>Measure10',
+												 	type: 'sap.ui.model.type.Float',  
+									   				formatOptions: {  
+									   						groupingEnabled: true,
+									   						decimals: 2,
+									   						groupingSeparator : '.',
+									   						decimalSeparator : ','
+									   					}
+													  }"
+										  state="{Measure>State10}"/>
+						</t:template>
+					</t:Column>	
+					<t:Column width="8rem">
+						<Label text="{Calendar>/Month11}" design="Bold"  />
+						<t:template>
+							<ObjectNumber number="{ path: 'Measure>Measure11',
+												 	type: 'sap.ui.model.type.Float',  
+									   				formatOptions: {  
+									   						groupingEnabled: true,
+									   						decimals: 2,
+									   						groupingSeparator : '.',
+									   						decimalSeparator : ','
+									   					}
+													  }"
+										  state="{Measure>State11}"/>
+						</t:template>
+					</t:Column>	
+					<t:Column width="8rem">
+						<Label text="{Calendar>/Month12}" design="Bold"  />
+						<t:template>
+							<ObjectNumber number="{ path: 'Measure>Measure12',
+												 	type: 'sap.ui.model.type.Float',  
+									   				formatOptions: {  
+									   						groupingEnabled: true,
+									   						decimals: 2,
+									   						groupingSeparator : '.',
+									   						decimalSeparator : ','
+									   					}
+													  }"
+										  state="{Measure>State12}"/>
+						</t:template>
+					</t:Column>	
+					</t:columns>
+			</t:Table>				
+		</content>
+	</Page>
+</mvc:View>

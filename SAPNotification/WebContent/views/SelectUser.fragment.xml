@@ -1,0 +1,18 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<SelectDialog
+		noDataText="{i18n>NODATA}"
+		title="{i18n>SELECTUSER}"
+		search="onUserSearch"
+		confirm="onUserClose"
+		close="onUserClose"
+		items="{
+			path: '/UserSet'
+		}" >
+		<StandardListItem
+			title="{Uname}"
+			description="{Fullname}"
+			type="Active" />
+	</SelectDialog>
+</core:FragmentDefinition>

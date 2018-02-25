@@ -1,0 +1,44 @@
+
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+ 	<Table	id="SkillsList"
+			items="{ path: 'SKILL>/Status'}" 
+			mode="SingleSelectMaster"
+            selectionChange="_onItemPress"
+		    busyIndicatorDelay="10"
+		    enableBusyIndicator="true">
+		<columns>
+			<Column>							
+				<Label text="{i18n>STATUS}" design="Bold" />
+			</Column>
+			<Column>
+				<Label text="{i18n>SKILL}"  design="Bold" />
+			</Column>
+			<Column>
+				<Label text="{i18n>DEVNBR}"  design="Bold" />
+			</Column>	
+		</columns>
+		<items>
+			<ColumnListItem>
+               <Image
+                    src="{
+						path: 'SKILL>Devnbr',
+						formatter: '.getIcon'						
+						}"	
+					densityAware="false"
+					width='15%' >
+					<layoutData>
+						<FlexItemData growFactor="1" />
+					</layoutData>
+				</Image>
+				<ObjectIdentifier
+						title="{SKILL>Sdesc}"
+						text="{SKILL>Sname}"/>	
+				<ObjectNumber		
+				number="{SKILL>Devnbr}"				
+				state="{= ${SKILL>Devnbr} === 0 ? 'Error' : 'Success' }" />	
+			</ColumnListItem>
+		</items>
+	</Table>	
+</core:FragmentDefinition>

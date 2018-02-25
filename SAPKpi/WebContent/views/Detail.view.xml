@@ -1,0 +1,62 @@
+<mvc:View
+        xmlns:core="sap.ui.core" 
+		xmlns:mvc="sap.ui.core.mvc" 
+		xmlns="sap.m"
+	    xmlns:l="sap.ui.layout"
+		xmlns:f="sap.ui.layout.form"	
+		xmlns:viz="sap.viz.ui5.controls"
+		xmlns:viz.data="sap.viz.ui5.data"
+		xmlns:viz.feeds="sap.viz.ui5.controls.common.feeds"
+		controllerName="SAPKpi.Application.controllers.Detail" 
+		xmlns:html="http://www.w3.org/1999/xhtml">
+
+<Page title="{i18n>DETAIL_TITLE}"
+	  showNavButton="{DEVICE>/system/phone}"
+	  navButtonPress="onNavButtonPress"
+	  class="MasterButton">
+	  	<headerContent>
+			<Button icon='sap-icon://table-chart'
+			        press="_onFigure"/>
+		</headerContent>
+		<content>	
+		<Panel id='settingsPanel' class="panelStyle" expandable="true" expanded="true" headerText="{i18n>DATERANGE}">
+		<HBox alignItems="Center">
+		<Label text="{i18n>UNTILPERIOD}" class="sapUiSmallMarginEnd"/>
+		<DatePicker
+		    id="DP5"
+			dateValue="{Info>/EndDate}"
+			valueFormat="yyyy-MM"
+			displayFormat="yyyy-MM"
+			change="onPeriodChange"/>
+		</HBox>
+
+		</Panel>
+		    <viz:Popover id="idPopOver"></viz:Popover>
+			<viz:VizFrame id="idVizFrame" 
+						  uiConfig="{applicationSet:'fiori'}"
+                		  height='100%' 
+                		  width="100%" 
+                		  vizType='line'>
+                <viz:dataset>
+                    <viz.data:FlattenedDataset data="{/}">
+                        <viz.data:dimensions>
+                            <viz.data:DimensionDefinition name="Month"                              
+                                value="{Month}" />
+                        </viz.data:dimensions>
+                        <viz.data:measures>
+                            <viz.data:MeasureDefinition name="SIP"
+                                value="{Measure1}" />                            
+                        </viz.data:measures>
+                    </viz.data:FlattenedDataset>
+                </viz:dataset>
+ 
+                <viz:feeds>
+                    <viz.feeds:FeedItem id='valueAxisFeed' uid="valueAxis" type="Measure"
+                        values="SIP" />                    
+                    <viz.feeds:FeedItem uid="categoryAxis" type="Dimension"
+                        values="Month" />                        
+                </viz:feeds>
+            </viz:VizFrame>
+		</content>
+	</Page>
+</mvc:View>

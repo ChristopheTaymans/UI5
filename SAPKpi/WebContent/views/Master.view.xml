@@ -1,0 +1,61 @@
+<mvc:View xmlns:core="sap.ui.core" 
+		xmlns:mvc="sap.ui.core.mvc" 
+		xmlns="sap.m"
+		controllerName="SAPKpi.Application.controllers.Master" 
+		xmlns:html="http://www.w3.org/1999/xhtml">
+		
+<Page title="{i18n>MASTER_TITLE} ({Info>/actualCount}/{Info>/totalCount})"
+      id="page"
+	  showHeader="true">	
+           <subHeader>           
+			<Toolbar id="searchBar">	
+				<SearchField
+					    id="searchKPI"
+						liveChange="onKpiSearch"
+						width="100%"
+						showSearchButton="false"						
+						placeholder="{i18n>SEARCHKPI}"
+						 />
+						<ToolbarSpacer />	
+					<Button id="refresh"  
+					        visible="{= ${DEVICE>/support/touch} === true ? false : true  }"
+							press="handleRefresh" 
+							icon="sap-icon://refresh"/> 
+				</Toolbar>	
+			</subHeader>
+			
+			<content>	  
+          	<PullToRefresh id="pullToRefresh"
+				visible="{DEVICE>/support/touch}"
+				refresh="handleRefresh" /> 	
+				
+				<List	id="lst"
+						items="{
+							path: '/KpiTypeSet',
+							sorter: [
+								{
+									path: 'DescText',
+									descending: false						
+								}
+							]
+						}" 
+						busyIndicatorDelay="10"
+						mode="SingleSelectMaster"
+						growing="true"
+						growingThreshold="20"
+						growingScrollToLoad="true"
+						itemPress="_onItemPress"
+						updateFinished="_onListUpdateFinished"
+						>
+						
+					<items>
+						<ObjectListItem	
+							 intro = "{KpiKey}"
+							 title="{DescText}"	
+							 type="{= ${DEVICE>/system/phone} === true ? 'Navigation' : 'Active' }">							 
+						</ObjectListItem>						
+					</items>					
+				</List>
+			</content>
+		</Page>
+</mvc:View>

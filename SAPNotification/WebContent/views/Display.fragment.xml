@@ -1,0 +1,147 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+	
+	<VBox id="DisplayBox">	
+						<ObjectListItem	
+							 intro = "{i18n>NOTIFICATIONID} : { path : 'Qmnum', formatter : '.deleteZero'}"
+							 title="{Qmtxt}">							       
+							 <attributes>
+						   	</attributes>						   	
+                            <firstStatus>
+				                <ObjectStatus 	title = "{i18n>STATUS}"
+				                				text="{Qmsttxt}"
+				                				state="{ path : 'Qmsttxt',
+				                						formatter : '.getState'}"
+			        					 />
+				            </firstStatus> 
+						</ObjectListItem>
+
+			<IconTabBar class="sapUiResponsiveContentPadding">
+				<items>
+					<IconTabFilter icon="sap-icon://hint">
+					<content>
+						<VBox class="sapUiSmallMargin">
+						    <f:SimpleForm 	minWidth="1024"
+											maxContainerCols="2"
+											editable="true"
+											layout="ResponsiveGridLayout"									
+											labelSpanL="3"
+											labelSpanM="3"
+											emptySpanL="4"
+											emptySpanM="4"
+											columnsL="1"
+				                            columnsM="1" 
+				                            class="editableForm"
+				                            title="{i18n>HEADER}">			                
+				               
+						        <f:content >
+						            <Label text="{i18n>BEGINDATE}"/>
+						            <Text text="{
+						        						path : 'Strmn',
+						        						type: 'sap.ui.model.type.Date',
+						        						formatOptions:{pattern: 'dd/MM/yyyy'}
+						        					}"/>	
+						        	<Label text="{i18n>ENDDATE}"/>
+						            <Text text="{
+						        						path : 'Ltrmn',
+						        						type: 'sap.ui.model.type.Date',
+						        						formatOptions:{pattern: 'dd/MM/yyyy'}
+						        					}"/>
+				                   
+		                            <Label text="{i18n>URGENCE}"/>	
+			                        <ComboBox
+			                        editable = "false"
+						                selectedKey="{Qmcod}"
+						                showSecondaryValues= "true"
+										items="{
+											path: '/UrgenceSet', 
+											sorter: { path: 'Qktextgr' } 
+										}"> 
+				                    <core:ListItem  key="{Code}" 
+				                    		   text="{Qktextco}" />
+			                        </ComboBox>							 
+						           	<Label text="{i18n>SERVSUB}"/>
+			                        <ComboBox
+			                        editable = "false"
+						                selectedKey="{Fecod}"						
+										items="{
+											path: '/GroupCodeSet',
+											sorter: { path: 'Qktextgr' }
+ 										}"> 
+				                    <core:ListItem  key="{Code}" 
+				                    		   text="{Qktextco}"  />
+			                        </ComboBox>	
+						            <Label text="{i18n>CATEGORY}"/>
+			                        <ComboBox
+			                        editable = "false"
+						            selectedKey="{Category}">									
+										<core:Item key="I" text="{i18n>INCIDENT}" />
+										<core:Item key="R" text="{i18n>REQUEST}"/>								
+								    </ComboBox>	
+								<Label text="{i18n>PCNUMBER}"/>
+						        <Text text="{Pcnumber}"/>
+						        <Label text="{i18n>REFERENCE}"/>
+						        <Text text="{Qnumref}"/>							            
+						        </f:content>
+						    </f:SimpleForm>
+					    </VBox>
+
+					</content>
+					</IconTabFilter>
+					<IconTabFilter icon="sap-icon://collaborate">	
+				<Table id="lineItemsList1" 
+			       width="auto" 
+			       items="{PartnerSet/}" 
+			       class="sapUiResponsiveMargin">
+				<headerToolbar>
+					<Toolbar >
+						<Title text="{i18n>PARTNER}"/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="{i18n>FUNCTION}"/>
+					</Column>
+					<Column >
+						<Text text="{i18n>USER}"/>
+					</Column>
+					<Column  >
+					    <header>
+					        <Text text="{NAME}" maxLines="0" />
+					    </header>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>						  
+							<ObjectIdentifier text="{Vtext}" />
+						    <ObjectIdentifier text="{Uname}" />
+						    
+						    <VBox>
+						    <ObjectIdentifier text="{Fullname}" />
+						    <Link text="{EMail}"
+						    	  href ="mailto:{EMail}"/>
+						    </VBox>
+				            			
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>					
+					</IconTabFilter>
+					<IconTabFilter icon="sap-icon://comment">
+					  <Title  text = "{i18n>LONGDESCRIPTION}"/>
+					  <TextArea 
+					            value="{Qmltxt}"
+					  			placeholder = "{i18n>COMMENTS_PLACEHOLDER}" 
+					  			maxLength = "1024" 
+					  			rows="8" 
+					  			cols="132"
+					  			 wrapping = "hard" />
+					</IconTabFilter>
+				</items>
+			</IconTabBar>	
+	</VBox>
+</core:FragmentDefinition>	

@@ -1,0 +1,95 @@
+<core:View xmlns:core="sap.ui.core" 
+		xmlns:mvc="sap.ui.core.mvc" 
+		xmlns="sap.m"
+		controllerName="SAPSkillsOverview.Application.views.DeveloperList" 
+		xmlns:html="http://www.w3.org/1999/xhtml"
+		displayBlock="true"
+		height="100%">
+	<Page 	title="Developer List" titleLevel="H2"
+			showNavButton="true"
+			navButtonPress="onNavButton">
+		<content>
+			<ObjectHeader title="{Info>/Team} > {Info>/Domain} > {i18n>SKILL} : {Skills>/Description}"/>   
+			<Table id="Table"			
+		      inset="false"
+					items="{ path: 'Skills>/',
+						sorter: [
+							{
+								path: 'Skills>Levexp',
+								descending: true								
+							},
+							 {
+								path: 'Skills>Certif',
+								descending: true								
+							},
+							{
+								path: 'Skills>Lnam',
+								descending: false								
+							}	
+						]						
+			}" 
+			 mode="SingleSelectMaster"
+             selectionChange="_onListSlectionChange"
+		     busyIndicatorDelay="10"
+		     enableBusyIndicator="true">
+				<headerToolbar>
+					<Toolbar>
+						<Title text="{Skills>/DevCount} {i18n>DEVELOPERS} :" level="H2"/>
+						<ToolbarSpacer></ToolbarSpacer>
+						</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column>							
+						<Label text="{i18n>NAME}" design="Bold" />
+					</Column>
+					<Column>	
+						<Label text="{i18n>USERID}" design="Bold"  />
+					</Column>
+		      		<Column >  
+		                <Label text="{i18n>LEVEXP}" design="Bold" />  
+		      		</Column>
+					<Column>
+						<Label text="{i18n>CERTIFIED}" design="Bold" />
+					</Column>	
+					<Column>
+						<Label text="{i18n>ROOKIE}"  design="Bold" />
+					</Column>	
+				</columns>
+				<items>
+					<ColumnListItem>				
+						<Text text="{Skills>Lnam}" />
+						<Text text="{Skills>Bname}" />
+						<RatingIndicator enabled = "false"
+	                              maxValue="5" 
+								  class="sapUiSmallMarginBottom" 
+								  value="{ path: 'Skills>Levexp', 								              
+		                                   formatter: '.returnFloat'
+								         }"/>								         
+						  <Image
+						    src="{ path: 'Skills>Certif',
+						    	   formatter :'.getIcon2'
+						    	   }"			
+							visible="{= !!${Skills>Certif} ? true : false }"
+							densityAware="false"
+							width='15%' >
+							<layoutData>
+								<FlexItemData growFactor="1" />
+							</layoutData>
+						</Image>						
+						<Image
+							src="{ path: 'Skills>Student',
+						    	   formatter :'.getIcon2'
+						    	   }"	
+		                    visible="{= !!${Skills>Student} ? true : false }"					
+							densityAware="false"
+							width='15%' >
+							<layoutData>
+								<FlexItemData growFactor="1" />
+							</layoutData>
+						</Image>	
+					</ColumnListItem>
+				</items>
+			</Table>	
+		</content>
+	</Page>
+</core:View>

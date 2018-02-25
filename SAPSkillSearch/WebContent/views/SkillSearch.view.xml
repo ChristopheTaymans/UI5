@@ -1,0 +1,54 @@
+<mvc:View xmlns:core="sap.ui.core" 
+		xmlns:mvc="sap.ui.core.mvc" 
+		xmlns="sap.m"
+		controllerName="SAPSkillsSearch.Application.views.SkillSearch" 
+		xmlns:html="http://www.w3.org/1999/xhtml"
+		displayBlock="true"
+		height="100%">
+		
+
+	<Page title="{i18n>SKILL_SEARCH}" id="content">
+		<content >		
+			<Table id="listSearch" 		  		
+		  		 mode="Delete"
+		  		 delete="_onDeleteItem"
+		  		 enableBusyIndicator  = "true"
+		  		 busyIndicatorDelay="1"	
+		  		 items="{
+						path: 'Selected>/'						
+					}"					>  
+       			<columns>  
+	           		<Column width="80%">  
+	           		
+	                	<Text text="{i18n>SKILL}" />  
+	      			</Column>   
+	          		<Column >  
+	                	<Text text="{i18n>REQUIRED}" />  
+	      			</Column>        			
+      			</columns>  
+            	<items>  
+					<ColumnListItem>	
+						
+						<ObjectIdentifier
+						    	title="{Selected>Desc}"
+						    	text="{Selected>Skill}"/>
+				
+						<Switch id="Switch" 
+								state="{Selected>Required}"
+								change="_onSwitch"/>
+																			 
+					</ColumnListItem>
+            	</items>  
+    		</Table>       
+		</content>		
+		<footer>   
+			<OverflowToolbar id="otbFooter">
+		<ToolbarSpacer/>
+                <Button 
+                icon="sap-icon://search"
+                press="_onSearch"
+                />
+			</OverflowToolbar>                
+		</footer>
+	</Page>
+</mvc:View>

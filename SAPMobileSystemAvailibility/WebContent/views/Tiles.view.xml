@@ -1,0 +1,55 @@
+<mvc:View xmlns:core="sap.ui.core" 
+		xmlns:mvc="sap.ui.core.mvc" 
+		xmlns="sap.m"
+		xmlns:l="sap.ui.layout"
+		xmlns:f="sap.ui.layout.form"	
+		controllerName="SAPMobileSystemAvailibility.Application.controllers.Tiles" 
+		xmlns:html="http://www.w3.org/1999/xhtml"
+		displayBlock="true"
+		height="100%">
+
+	<Page 	title="{i18n>FULL_SCREEN_TITLE}" titleLevel="H2"
+			showNavButton="{Info>/BackButton}" 
+			navButtonPress="_onNavButton">
+		<content>		
+			<l:VerticalLayout id = "BreadcrumbContent"
+							  class="sapUiContentPadding" width="100%">
+				<l:content >				
+				</l:content>
+			</l:VerticalLayout>
+			<ObjectHeader	
+			     visible = "{Info>/HeaderVisible}" 
+				 title = "{Description}"						
+				 icon="{
+							path: 'Syststatus',
+							formatter: '.getStatusIcon'						
+						}">	
+			</ObjectHeader>
+			<TileContainer	id="TileContainer"
+				tiles="{   path: 'Availibility>/',
+							sorter: [
+								{
+									path: 'Seq',
+									descending: false						
+								}
+							]
+						}" 	
+				height="80%">
+				<StandardTile	
+					icon="{
+					path: 'Availibility>',
+					formatter: '.getIcon'						
+					}"
+					title="{= ${Availibility>Title} ? ${Availibility>Title} : ${Availibility>Description} }"
+					info="{Availibility>Info}"
+					infoState="{= ${Availibility>Infostate}==='' ? 'None' : ${Availibility>Infostate}  }"
+					number="{
+					path: 'Availibility>',
+					formatter: '.setTileNumber'						
+					}"	
+					numberUnit="{Availibility>Numberunit}"	
+					press="_onPressTile"/>
+			</TileContainer>
+		</content>
+	</Page>
+</mvc:View>

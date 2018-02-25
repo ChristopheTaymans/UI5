@@ -1,0 +1,18 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TileContainer	id="DomainTileContainer"
+					tiles="{Domains>/}"
+					height="80%">
+		<StandardTile	icon="{
+						path: 'Domains>Missdev',
+						formatter: '.getIcon'						
+						}"
+						title="{Domains>ShortDesc}"								
+						info="Developer: {Domains>Devnbr}"			
+						infoState="{= ${Domains>Devnbr} === 0 ? 'Error' : 'None' }"
+						press="_onPressTile"/>
+	</TileContainer>	
+</core:FragmentDefinition>
+
+

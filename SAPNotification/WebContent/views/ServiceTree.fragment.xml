@@ -1,0 +1,33 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns:t="sap.ui.table">	
+    <Dialog Title="{i18n>GETSERVICE}">
+    <content>
+            <t:TreeTable                    
+                    rows="{path:'Service>/'}"
+                    selectionMode="Single"
+                    enableSelectAll="false">
+                <t:columns>
+                   <t:Column >
+                        <Label text="{i18n>SERVSUB}"/>   
+                        <t:template>                   
+                        <Link text="{Service>Code}" enabled="{Service>Link}" press="_onServicePress"/>   
+                        </t:template>                   
+                    </t:Column>
+                    <t:Column >
+                        <Label text="{i18n>DESCRIPTION}"/>     
+                        <t:template>                  
+                        <Text text="{Service>Descr}"/>      
+                        </t:template>                
+                    </t:Column>                    
+                </t:columns>
+            </t:TreeTable>
+			</content>
+			<buttons>
+			<Button press="onClose" icon='sap-icon://decline'/>
+			</buttons>		
+		</Dialog>
+</core:FragmentDefinition>

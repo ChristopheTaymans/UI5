@@ -1,0 +1,116 @@
+{
+	"_version": "0.1.0",
+	"sap.app": {
+		"_version": "0.1.0",
+		"id": "SAPMobileSystemAvailibility.Application.Component",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{APP_TITLE}}",
+		"description": "{{APP_DESCRIPTION}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"oData": {
+				"uri": "proxy/http/sapfid.msnet.railb.be:8002/sap/opu/odata/sap/Z_ESS_MOBILE_SYST_AVAILIBILITY_SRV",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "/localService/metadata.xml"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"_version": "0.1.0",
+		"technology": "UI5",
+
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_bluecrystal"
+		]
+	},
+	"sap.ui5": {
+		"_version": "0.1.0",
+		"rootView": {
+			"viewName": "SAPMobileSystemAvailibility.Application.views.Main",
+			"type": "XML",
+			"id": "vwMain"
+		},
+		"resources": {},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"": {
+				"dataSource": "oData",
+				"settings": {
+					"json": true,
+					"useBatch": false,
+					"tokenHandling": true,	
+					"defaultBindingMode":"TwoWay"
+				}
+			},
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "SAPMobileSystemAvailibility.Application.i18n.i18n"
+				}
+			}
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "SAPMobileSystemAvailibility.Application.views",
+				"controlId": "AppControl",
+				"controlAggregation": "pages",
+                "bypassed": {
+                	"target": "tileTarget"
+	          	}
+			},
+			"routes": [
+			{
+				"pattern": "",
+				"name": "initialRoute",
+				"target": "tileTarget"
+			}, {
+				"pattern": "level/{branchId}",
+				"name": "levelRoute",
+				"target": "tileTarget"
+            }, {
+				"pattern": "detail/{TargetId}",
+				"name": "detailRoute",
+				"target": "detailTarget"
+            }          
+            ],
+			"targets": {
+				"tileTarget": {		
+					"viewName": "Tiles",
+					"viewId": "vwTiles",
+					"controlAggregation": "pages",
+					"viewLevel": 1
+				},
+				"detailTarget": {		
+					"viewName": "Detail",
+					"viewId": "vwDetail",
+					"controlAggregation": "pages",
+					"viewLevel": 1
+				}
+			}
+		}
+	}
+}

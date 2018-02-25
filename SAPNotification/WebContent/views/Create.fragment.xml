@@ -1,0 +1,169 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns:t="sap.ui.table">
+	
+	<VBox id="CreateBox">	
+		<ObjectListItem	
+			 intro ="{i18n>NOTIFICATIONID} : { path : 'New>/Qmnum', formatter : '.deleteZero'}"
+			 title="{New>/Qmtxt}">
+			 <attributes>		
+		   	</attributes>
+		</ObjectListItem>
+
+		<IconTabBar id="iconTabBar" class="sapUiResponsiveContentPadding">
+			<items>
+				<IconTabFilter icon="sap-icon://hint">
+					<content>
+						<VBox class="sapUiSmallMargin">
+						    <f:SimpleForm 	minWidth="1024"
+											maxContainerCols="2"
+											editable="true"
+											layout="ResponsiveGridLayout"									
+											labelSpanL="3"
+											labelSpanM="3"
+											emptySpanL="4"
+											emptySpanM="4"
+											columnsL="1"
+				                            columnsM="1"
+				                            class="editableForm"
+				                            title="{i18n>HEADER}" >
+						        <f:content >
+						        <Label text="{i18n>DESCRIPTION}" required="true"/>
+						        <Input value= "{New>/Qmtxt}"
+						        	   maxLength="40"/>						        
+						            <Label text="{i18n>BEGINDATE}" required="true"/>						            
+						            <DatePicker id="StartDate"
+											dateValue = "{New>/Strmn}"
+											displayFormat = "dd/MM/yyyy"
+											placeholder="Enter Date ..."
+											change="onDateChange"/>	
+						        	<Label text="{i18n>ENDDATE}" required="true"/>
+		                            <DatePicker id="EndDate"
+											dateValue = "{New>/Ltrmn}"
+											displayFormat = "dd/MM/yyyy"
+											placeholder="Enter Date ..."											
+											change="onDateChange"/>
+						            <Label text="{i18n>URGENCE}" required="true"/>
+						            <HBox>	
+		                            <Input value = "{New>/Qmgrp}"
+		                                   valueHelpOnly = "true"
+		                                   showValueHelp = "true"
+		                                   valueHelpRequest = "onUrgenceRequest"
+		                                   />
+                                     <Input value = "{New>/Qmcod}"
+		                                   valueHelpOnly = "true"
+		                                   showValueHelp = "true"
+		                                   valueHelpRequest = "onUrgenceRequest"
+		                                   />	
+		                             </HBox>
+		                            <Label text="{i18n>SERVSUB}" required="true"/>
+		                            <HBox>
+		                            <Input value = "{New>/Fegrp}"
+		                                   valueHelpOnly = "true"
+		                                   showValueHelp = "true"
+		                                   valueHelpRequest = "onServiceRequest"
+		                                   />
+                                     <Input value = "{New>/Fecod}"
+		                                   valueHelpOnly = "true"
+		                                   showValueHelp = "true"
+		                                   valueHelpRequest = "onServiceRequest"
+		                                   />	
+		                             </HBox>
+							         					            
+						            <Label text="{i18n>CATEGORY}" required="true"/>
+						            <ComboBox
+						            selectedKey="{New>/Category}">									
+										<core:Item key="I" text="{i18n>INCIDENT}" />
+										<core:Item key="R" text="{i18n>REQUEST}"/>								
+								</ComboBox>	
+								<Label text="{i18n>PCNUMBER}" required="true"/>
+						        <Input value="{ path : 'New>/Pcnumber',
+						                            type : 'sap.ui.model.type.String',						                            
+						                            constraints : {  
+																	minLength : 9,  
+																    maxLength : 9 ,
+																     search : '^[0-9]+$' 
+                                                                  }
+						                          }"
+						                    maxLength="9"/>									
+								<Label text="{i18n>REFERENCE}"/>
+						        <Input value="{New>/Qnumref}"
+						                   maxLength="12"/>				            
+						        </f:content>
+						    </f:SimpleForm>
+					    </VBox>
+					</content>
+					</IconTabFilter>					
+					<IconTabFilter icon="sap-icon://collaborate">	
+						<Table id="PartList" 
+						   mode="Delete"
+					       delete="_onDeleteItem"	
+					       noDataText="{i18n>NOPARTNER}"
+					       width="auto"
+					       items="{NewPartner>/}" 
+					       class="sapUiResponsiveMargin">
+						<headerToolbar>
+							<Toolbar>
+								<Title text="{i18n>PARTNER}"/>
+								<ToolbarSpacer/>
+								<Button  text="{i18n>ADD}" press="onCreatePartner" icon="sap-icon://add"/>
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<Column>
+								<Text text="{i18n>FUNCTION}"/>
+							</Column>
+							<Column>
+								<Text text="{i18n>USER}"/>
+							</Column>
+							<Column >
+							    <header>
+							        <Text text="{NAME}" maxLines="0" />
+							    </header>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+		                       <cells>						  
+		         				 <ComboBox
+					                selectedKey="{NewPartner>Parvw}"						                
+									items="{
+										path: '/PartnerFctSet',
+										sorter: { path: 'Vtext' }
+									}">
+					                  <core:ListItem  key="{Parvw}" 
+					                  		   text="{Vtext}" />
+					          	</ComboBox>
+						        <Input id="NameInput"
+						          		 value="{NewPartner>Uname}" 
+						          		 maxLength="12"
+						          		 change = "onUserChange"
+						          		 valueHelpOnly = "false"
+		                                 showValueHelp = "true"
+		                                 valueHelpRequest = "onUserRequest"/>					    
+								    <VBox>
+								    <ObjectIdentifier text="{NewPartner>Fullname}" />
+								     <Link text="{NewPartner>EMail}"
+								    	   href ="mailto:{NewPartner>EMail}"/>
+								    </VBox>				            			
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+					</IconTabFilter>
+					<IconTabFilter icon="sap-icon://comment">
+					  <TextArea  
+					            value="{New>/Qmltxt}"
+					  			placeholder = "{i18n>COMMENTS_PLACEHOLDER}" 
+					  			maxLength = "1024" 
+					  			rows="8" 
+					  			cols="132"
+					  			 wrapping = "hard" />
+					</IconTabFilter>					
+				</items>
+			</IconTabBar>				
+	</VBox>		
+</core:FragmentDefinition>

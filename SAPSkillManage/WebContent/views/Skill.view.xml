@@ -1,0 +1,24 @@
+<mvc:View
+        xmlns:core="sap.ui.core" 
+		xmlns:mvc="sap.ui.core.mvc" 
+		xmlns="sap.m"
+	    xmlns:l="sap.ui.layout"
+	    xmlns:f="sap.ui.layout.form"
+		controllerName="SAPSkillManage.Application.views.Skill" 
+		xmlns:html="http://www.w3.org/1999/xhtml">
+
+	<Page id="page" title="{i18n>DETAIL_TITLE}" titleLevel="H2">	
+		<content>
+ 		</content> 
+ 		<footer>
+			<Bar>
+				<contentRight>
+					<Button id="edit" text="Edit" press="handleEditPress" icon="sap-icon://edit"/>
+					<Button id="save" text="Save" type="Emphasized" visible="false" press="handleSavePress" icon="sap-icon://save" />
+					<Button id="cancel" text="Cancel" visible="false" press="handleCancelPress" icon="sap-icon://decline"/>	
+					<Button id="delete" text="Delete" visible="true" press="handleDeletePress" icon="sap-icon://delete"/>	
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</mvc:View>

@@ -1,0 +1,18 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TileContainer	id="TileContainer"
+					tiles="{SKILL>/Status/}"
+					height="80%">
+		<StandardTile	icon="{
+						path: 'SKILL>Devnbr',
+						formatter: '.getIcon'						
+						}"
+						title="{SKILL>Sdesc}"		
+						info="Developer: {SKILL>Devnbr}"			
+						infoState="{= ${SKILL>Devnbr} === 0 ? 'Error' : 'None' }"
+						press="_onPressTile"/>
+	</TileContainer>	
+</core:FragmentDefinition>
+
+

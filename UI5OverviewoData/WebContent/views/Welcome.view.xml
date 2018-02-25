@@ -1,0 +1,43 @@
+<mvc:View xmlns:core="sap.ui.core" 
+          xmlns:mvc="sap.ui.core.mvc" 
+          xmlns="sap.m" 
+          xmlns:semantic="sap.m.semantic"
+          xmlns:l="sap.ui.layout"
+	      controllerName="ui5.overview.oData.controllers.Welcome" 
+	      xmlns:html="http://www.w3.org/1999/xhtml">
+	<semantic:MasterPage title="{i18n>welcome}" 
+	                     titleLevel='H2'
+	                     class="customBackground">
+		<semantic:content>		
+		<Title
+				text="{i18n>carouseltitle}"
+				titleStyle="H2"
+				class="sapUiSmallMargin"/>
+        <FlexBox 	height="100%"
+                    alignItems="Center"
+					justifyContent="Center">
+		<Carousel  id="carouselId"
+		           pageChanged="onCarouselPageChanged" 
+		           loop="true" 		           
+		           showPageIndicator="false"
+		           arrowsPlacement="Content"
+		           backgroundDesign="Solid"		           	          
+		           >
+			<pages>		
+		   <VBox id="CarouselPage1" backgroundDesign='Solid'>
+		   <core:Fragment  xmlns:core="sap.ui.core" 
+		                   fragmentName="ui5.overview.oData.views.carouselPage"
+		                   type="XML"/>
+		    </VBox>    
+		    <VBox id="CarouselPage2" backgroundDesign='Solid'>           
+			<core:Fragment  xmlns:core="sap.ui.core" 
+		                   fragmentName="ui5.overview.oData.views.carouselPage"
+		                   type="XML"/>
+		   </VBox> 
+        
+			</pages>
+		</Carousel>	
+       </FlexBox>
+		</semantic:content>	
+	</semantic:MasterPage>
+</mvc:View>

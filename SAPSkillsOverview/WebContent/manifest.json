@@ -1,0 +1,160 @@
+{
+	"_version": "0.1.0",
+	"sap.app": {
+		"_version": "0.1.0",
+		"id": "SAPSkillsOverview.Application.Component",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{APP_TITLE}}",
+		"description": "{{APP_DESCRIPTION}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"Skills": {
+				"uri": "proxy/http/sapfid.msnet.railb.be:8002/sap/opu/odata/sap/Z_ESS_SKILLS_ODATA_PROVIDER_SRV",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"_version": "0.1.0",
+		"technology": "UI5",
+
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_bluecrystal"
+		]
+	},
+	"sap.ui5": {
+		"_version": "0.1.0",
+		"rootView": {
+			"viewName": "SAPSkillsOverview.Application.views.Main",
+			"type": "XML",
+			"id": "vwMain"
+		},
+		"resources": {},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"": {
+				"dataSource": "Skills",
+				"settings": {
+					"json": true,
+					"useBatch": false,
+					"tokenHandling": false
+				}
+			},
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "SAPSkillsOverview.Application.i18n.i18n"
+				}
+			}
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "SAPSkillsOverview.Application.views",
+				"controlId": "AppControl",
+				"controlAggregation": "pages",
+                "bypassed": {
+                	"target": [ 
+                    	"teamList",
+                	    "noData"      	
+	                ]
+	          	}
+			},
+			"routes": [
+			{
+				"pattern": "",
+				"name": "initialRoute",
+				"target": [	
+				     "teamList",
+			    	 "noData"			    	 			    
+				    ]
+			},  {
+				"pattern": "domain/{Team}",
+				"name": "domainRoute",
+				"target": [	
+				    "domainStatus",
+			    	"teamList"		    	 			    
+				    ]
+            },{
+				"pattern": "status/:Domain:",
+				"name": "statusRoute",
+				"target": 	"skillStatus"	
+            },
+            {
+				"pattern": "developers/{Skill}",
+				"name": "developersRoute",
+				"target": "developerList"
+            }
+            
+            ],
+			"targets": {
+			"splitContainer": {
+					"viewName": "SplitContainer",
+					"viewLevel": 1				
+				},
+				"noData": {
+					"parent": "splitContainer",
+				    "controlId": "SplitControl",
+					"viewName": "NoData",
+					"viewId": "vwNoData",
+					"controlAggregation": "detailPages",
+					"viewLevel": 2				
+				},
+				"teamList": {		
+				    "parent": "splitContainer",
+				    "controlId": "SplitControl",
+					"viewName": "TeamList",
+					"viewId": "vwTeamList",
+					"controlAggregation": "masterPages",
+					"viewLevel": 1
+				},				
+				"domainStatus": {		
+				    "parent": "splitContainer",
+				    "controlId": "SplitControl",
+					"viewName": "DomainStatus",
+					"viewId": "vwDomainStatus",
+					"controlAggregation": "detailPages",
+					"viewLevel": 2
+				},
+				"skillStatus": {
+				    "parent": "splitContainer",
+				    "controlId": "SplitControl",
+					"viewName": "SkillStatus",
+					"viewId": "vwSkillStatus",
+					"controlAggregation": "detailPages",
+					"viewLevel": 2				
+				},
+				
+				"developerList": {
+					"viewName": "DeveloperList",
+					"viewId": "vwDeveloperList",
+					"controlAggregation": "pages",
+					"viewLevel": 1				
+				}
+			}
+		}
+	}
+}

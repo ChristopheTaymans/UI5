@@ -1,0 +1,142 @@
+{
+	"_version": "0.1.0",
+	"sap.app": {
+		"_version": "0.1.0",
+		"id": "ui5.overview.routing2.Component",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{APP_TITLE}}",
+		"description": "{{APP_DESCRIPTION}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"Data": {
+				"uri": "models/products.json",
+				"type": "JSON"
+			}		
+		}
+	},
+	"sap.ui": {
+		"_version": "0.1.0",
+		"technology": "UI5",
+
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_bluecrystal"
+		]
+	},
+	"sap.ui5": {
+		"_version": "0.1.0",
+		"rootView": {
+			"viewName": "ui5.overview.routing2.views.Main",
+			"type": "XML",
+			"id": "vwMain"
+		},
+		"resources": {},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"": {
+				"type": "sap.ui.model.json.JSONModel",
+				"dataSource":"Data"
+			},
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "ui5.overview.routing2.i18n.i18n"
+				}
+			}
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "ui5.overview.routing2.views",
+				"controlId": "AppControl",
+				"controlAggregation": "pages",
+                "bypassed": {
+                	"target": [ 
+                    	"masterTarget",
+                	    "noData"      	
+	                ]
+	          	}
+			},
+			"routes": [			
+				{
+					"pattern": "",
+					"name": "initialRoute",
+					"target": [	
+					   "masterTarget",
+					   "noData"		    			    	 		    	 			    
+				    ]	
+				}, {
+					"pattern": "detail/{path}",
+					"name":   "detailRoute",
+					"target": [	
+				     "masterTarget",	
+			    	 "detailTarget"			    	 		    	 			    
+				    ]	
+	            },
+	            {
+					"pattern": "fullscreen/{path}",
+					"name": "fullScreenRoute",
+					"target": "fullScreenTarget"
+	            }       
+            ],
+			"targets": {
+				"splitContainer": {
+					"viewName": "SplitContainer",
+					"viewLevel": 1		
+				},							
+				"masterTarget": {	
+					"parent": "splitContainer",
+				    "controlId": "SplitControl",
+					"viewName": "Master",
+					"viewId": "vwMaster",
+					"controlAggregation": "masterPages",		
+					"viewLevel": 1
+				},
+				"detailTarget": {
+					"parent": "splitContainer",
+				    "controlId": "SplitControl",
+					"viewName": "Detail",
+					"viewId": "vwDetail",
+					"controlAggregation": "detailPages",
+					"viewLevel": 2,
+					"transition" : "flip" 				
+				},
+				
+				"noData": {
+					"parent": "splitContainer",
+				    "controlId": "SplitControl",
+					"viewName": "NoData",
+					"viewId": "vwNoData",
+					"controlAggregation": "detailPages",
+					"viewLevel": 2				
+				},
+				
+				"fullScreenTarget": {
+					"viewName": "Detail",
+					"viewId": "vwDetail",
+					"controlAggregation": "pages",
+					"viewLevel": 1				
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,43 @@
+<core:View xmlns:core="sap.ui.core" 
+		xmlns:mvc="sap.ui.core.mvc" 
+		xmlns="sap.m"
+		controllerName="SAPSkillsOverview.Application.views.TeamList" 
+		xmlns:html="http://www.w3.org/1999/xhtml">
+		
+	<Page title="{i18n>TEAM_LIST} ({TeamCount>/Nbr})">	
+			<Toolbar>	
+				<SearchField
+					    id="searchTeam"
+						liveChange="onTeamSearch"
+						width="100%"
+						showSearchButton="false" />						
+				<ToolbarSpacer />	            		
+			</Toolbar>		
+			<content>	             	
+				<List	id="lstTeam"
+						items="{
+							path: 'Teams>/'							
+						}" 
+						busyIndicatorDelay="10"
+						mode="SingleSelectMaster"
+						growing="true"
+						growingThreshold="20"
+						growingScrollToLoad="true"
+						updateFinished="_onUpdateFinished"
+						itemPress="_onItemPress">
+					<items>
+						<ObjectListItem
+						        icon="{ path: 'Teams>Missdev',
+										formatter: '.getIcon'						
+										}"
+						    	title="{Teams>Auftxt}"						
+								intro="{Teams>TeamId}"
+								number="{Teams>Domnbr}"
+								numberUnit="{i18n>DOMAIN}"
+								type="Navigation">		
+						</ObjectListItem>						
+					</items>					
+				</List>
+			</content>
+		</Page>
+</core:View>

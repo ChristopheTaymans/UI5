@@ -1,0 +1,45 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core">
+	
+	<VBox class="sapUiSmallMargin" id="EditBox">
+		<f:SimpleForm 
+			minWidth="1024"
+			maxContainerCols="2"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			labelSpanL="3"
+			labelSpanM="3"
+			emptySpanL="4"
+			emptySpanM="4"
+			columnsL="1"
+			columnsM="1"
+			class="editableForm"
+			title="{i18n>SKILL} : {SkillSet>/Sname}"  >
+			<f:content>				
+				<Label text="{i18n>DESCRIPTION}" />
+				<Input value="{SkillSet>/ShortDesc}"
+				       maxLength="35"/>
+				<Label text="{i18n>LONG_DESCRIPTION}" />
+				<TextArea rows="5"
+						  maxLength="255"
+						  wrapping="Soft"
+				          value="{SkillSet>/LongDesc}">
+				</TextArea>		
+				<Label text="{i18n>DOMAIN}"/>				
+				<Select
+                    forceSelection="false"
+                    selectedKey="{SkillSet>/Dname}"
+					items="{
+						path: '/DomainSet',
+						sorter: { path: 'ShortDesc' }
+					}">
+					<core:Item key="{Dname}" text="{ShortDesc}" />
+				</Select>		
+			</f:content>
+		</f:SimpleForm>
+	</VBox>
+	
+</core:FragmentDefinition>	

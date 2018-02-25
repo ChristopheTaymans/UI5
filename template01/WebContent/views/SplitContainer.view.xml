@@ -1,0 +1,10 @@
+<mvc:View 
+		xmlns:core="sap.ui.core" 
+		xmlns:mvc="sap.ui.core.mvc" 
+		xmlns="sap.m"
+		controllerName="template01.Application.controllers.SplitContainer" 
+		xmlns:html="http://www.w3.org/1999/xhtml"
+		displayBlock="true"
+		height="100%">	
+	<SplitContainer	id="SplitControl" />
+</mvc:View>

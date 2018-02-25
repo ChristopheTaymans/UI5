@@ -1,0 +1,58 @@
+<core:View xmlns:core="sap.ui.core" 
+		   xmlns:f="sap.ui.layout.form" 	
+		   xmlns="sap.m"
+	       controllerName="ui5.overview.comp.model.controllers.Main">
+	<App>
+		<pages>
+			<Page title="Simple model">
+				<content>
+					<VBox class="sapUiSmallMargin">
+						<f:SimpleForm id="SimpleFormChange354wideDual" 
+									  editable="true" 
+									  layout="ResponsiveGridLayout" 
+									  labelSpanXL="2" 
+									  labelSpanL="2" 
+									  labelSpanS="2"
+							          emptySpanXL="0" 
+							          emptySpanL="3" 
+							          emptySpanM="3" 
+							          emptySpanS="3" 
+							          columnsXL="1" 
+							          columnsL="1" 
+							          columnsM="1" 
+							          singleContainerFullSize="false"
+							          adjustLabelSpan="false">
+							<f:content>
+								<Label text="Product"/>
+								<Input  id="productInput2" 
+								        type="Text" 
+								        textFormatMode="KeyValue" 
+								        submit="onSubmit" 
+								        placeholder="Enter Product ..."
+									    showSuggestion="true" 
+									    suggestionItems="{viewData>/Products}" 
+									    fieldWidth="" width="50%">
+									<suggestionItems>
+										<core:ListItem key="{viewData>Id}" text="{viewData>Description}" additionalText="{viewData>Id}"/>
+									</suggestionItems>
+								</Input>
+								<Label text="Price"/>
+								<ObjectNumber state="Error"
+									number="{ path: 'appData>/Product/Price',
+									         type: 'sap.ui.model.type.Float', 
+									         formatOptions: { 
+									           groupingEnabled: true, 
+									           decimals: 2, 
+									           groupingSeparator : '.', 
+									           decimalSeparator : ',' }
+									         }"
+									unit="{appData>/Product/Currency}"
+								    textAlign="Initial"/>
+							</f:content>
+						</f:SimpleForm>
+					</VBox>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</core:View>

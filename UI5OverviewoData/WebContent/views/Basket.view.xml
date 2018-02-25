@@ -1,0 +1,84 @@
+<mvc:View xmlns:core="sap.ui.core" 
+          xmlns:mvc="sap.ui.core.mvc" 
+          xmlns="sap.m" 
+          xmlns:html="http://www.w3.org/1999/xhtml"
+          xmlns:semantic="sap.m.semantic" 
+	      controllerName="ui5.overview.oData.controllers.Basket">
+	<semantic:FullscreenPage title="{i18n>basket}" 
+	      titleLevel="H4" 
+	      showNavButton="true" 
+	      navButtonPress="onNavButton">
+	      <semantic:positiveAction>
+						<semantic:PositiveAction text="{i18n>proceed}" 
+					                             press="_onProceed"
+					                             visible="{= ${Quantity} === 0 ? false : true  }"/>
+		  </semantic:positiveAction>
+		<semantic:content>
+			<ObjectHeader responsive="false" 
+			              title="{i18n>totalbasket}" 
+			              titleLevel="H3" 
+			              backgroundDesign="Translucent" 
+			              numberUnit="EUR"
+				          number="{ path: 'Price', 
+				          			type: 'sap.ui.model.type.Float', 
+				          			formatOptions: { groupingEnabled: true, 
+				          			                 decimals: 2, 
+				          			                 groupingSeparator : '.', 
+				          			                 decimalSeparator : ',' } 
+				          		  }">
+			<ObjectAttribute text="{i18n>totalitem} : {Quantity}"/>
+			</ObjectHeader>
+			<Table id="basketList" 
+			       inset="false" 
+			       items="{ path: '/BasketItemSet', 
+			                sorter: { path: 'Name'} }" 
+			       mode="Delete" 
+			       delete="_onDelete">
+				<headerToolbar>
+					<Toolbar>
+						<Title text="Basket" 
+						       level="H2"/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column width="10%">
+						<Text text="Quantity"/>
+					</Column>
+					<Column width="60%">
+						<Text text="Item"/>
+					</Column>
+					<Column>
+						<Text text="Total"/>
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Input type='Number' 
+							       value="{ path: 'Quantity', 
+							                type: 'sap.ui.model.type.Integer'}" 
+							       submit="_onSubmit"/>
+							<ObjectListItem title="{Name}" 
+							                intro="{Productid}" 
+							                icon="{Picurl}">
+								<ObjectAttribute
+									text="{Quantity} {Uom} X { path: 'Price', 
+									                           type: 'sap.ui.model.type.Float', 
+									                           formatOptions: { groupingEnabled: true, 
+									                                            decimals: 2, 
+									                                            groupingSeparator : '.', 
+									                                            decimalSeparator : ',' } }
+									                        {Currency}"/>
+							</ObjectListItem>
+							<ObjectListItem numberUnit="{Currency}" 
+							                number="{parts: [ {path: 'Quantity'}, 
+							                        {path: 'Price'} ], 
+							                        formatter : '.itemTotalPrice'}">
+							</ObjectListItem>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</semantic:content>
+	</semantic:FullscreenPage>
+</mvc:View>

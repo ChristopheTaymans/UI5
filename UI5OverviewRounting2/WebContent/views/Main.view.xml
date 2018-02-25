@@ -1,0 +1,9 @@
+<mvc:View 	xmlns:core="sap.ui.core" 
+			xmlns:mvc="sap.ui.core.mvc" 
+			xmlns="sap.m"		
+			xmlns:html="http://www.w3.org/1999/xhtml"
+	    	controllerName="ui5.overview.routing2.controllers.Main" 			
+			displayBlock="true"
+			height="100%">			
+			<NavContainer id="AppControl"/>			
+</mvc:View>

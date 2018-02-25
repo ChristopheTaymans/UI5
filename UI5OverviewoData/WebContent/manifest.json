@@ -1,0 +1,209 @@
+{
+	"_version": "0.1.0",
+	"sap.app": {
+		"_version": "0.1.0",
+		"id": "ui5.overview.oData.Component",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{APP_TITLE}}",
+		"description": "{{APP_DESCRIPTION}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"oData": {
+				"uri": "proxy/http/sapfid.msnet.railb.be:8002/sap/opu/odata/sap/ZUI5OVERVIEW_SRV",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0",
+					"localUri": "/localService/metadata.xml"
+				}
+			}		
+		}
+	},
+		
+	"sap.ui": {
+		"_version": "0.1.0",
+		"technology": "UI5",
+
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_bluecrystal"
+		]
+	},
+	"sap.ui5": {
+		"_version": "0.1.0",
+		"rootView": {
+			"viewName": "ui5.overview.oData.views.Main",
+			"type": "XML",
+			"id": "vwMain"
+		},	
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		
+	    "models": {
+			"": {
+				"dataSource": "oData",
+				"settings": {
+					"json": true,
+					"useBatch": false,
+					"tokenHandling": true,	
+					"defaultBindingMode":"TwoWay",
+					"refreshAfterChange" : true
+				}
+			},
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+				"bundleName": "ui5.overview.oData.i18n.i18n"
+				}
+			}
+	    },	
+		"resources": {
+			"css": [
+				{
+					"uri": "css/style.css"
+				}
+			]
+		},
+
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "ui5.overview.oData.views",
+				"controlId": "AppControl",
+				"controlAggregation": "pages",
+                "bypassed": {
+                	"target": [ "welcomeTarget",
+                    	        "categoryTarget"               	          	
+	                ]
+	          	}
+			},
+			"routes": [			
+				{
+					"pattern": "",
+					"name": "initialRoute",
+					"target": [	
+					   "welcomeTarget",	
+					   "categoryTarget"					   	    			    	 		    	 			    
+				    ]	
+				}, {
+					"pattern": "product/{path}",
+					"name":   "productRoute",
+					"target": [	
+				     "welcomeTarget",
+				     "productTarget"			    	 			    	 		    	 			    
+				    ]	
+	            }, {
+					"pattern": "detail/{path}",
+					"name":   "detailRoute",
+					"target": "detailTarget"
+	            }, {
+					"pattern": "basket/",
+					"name":   "basketRoute",
+					"target": "basketTarget"    	
+	            },
+	            {
+					"pattern": "fullscreen/{path}",
+					"name": "fullScreenRoute",
+					"target": "fullScreenTarget"
+	            },
+	            {
+					"pattern": "ProceedOrder",
+					"name": "orderRoute",
+					"target": "orderTarget"
+	            } ,
+	            {
+					"pattern": "OrderSummary",
+					"name": "orderSummaryRoute",
+					"target": "orderSummaryTarget"
+	            }             
+            ],
+			"targets": {
+				"splitContainer": {
+					"viewName": "SplitContainer",
+					"viewLevel": 1		
+				},							
+				"categoryTarget": {	
+					"parent": "splitContainer",
+				    "controlId": "SplitControl",
+					"viewName": "CategoriesList",
+					"viewId": "vwCategory",
+					"controlAggregation": "masterPages",	
+					"transition" : "flip" ,	
+					"viewLevel": 1
+				},				
+				"productTarget": {
+					"parent": "splitContainer",
+				    "controlId": "SplitControl",
+					"viewName": "ProductList",
+					"viewId": "vwProduct",
+					"controlAggregation": "masterPages",
+					"viewLevel": 2,
+					"transition" : "flip" 				
+				},
+				"detailTarget": {
+					"parent": "splitContainer",
+				    "controlId": "SplitControl",
+					"viewName": "Detail",
+					"viewId": "vwDetail",
+					"controlAggregation": "detailPages",
+					"viewLevel": 3,
+					"transition" : "flip" 				
+				},
+				"basketTarget": {
+					"viewName": "Basket",
+					"viewId": "vwBasket",
+					"controlAggregation": "pages",
+					"viewLevel": 1,
+					"transition" : "flip" 				
+				},
+				
+				"welcomeTarget": {
+					"parent": "splitContainer",
+				    "controlId": "SplitControl",
+					"viewName": "Welcome",
+					"viewId": "vwWelcome",
+					"controlAggregation": "detailPages",
+					"viewLevel": 1				
+				},
+				
+				"fullScreenTarget": {
+					"viewName": "Detail",
+					"viewId": "vwDetail",
+					"controlAggregation": "pages",
+					"viewLevel": 1				
+				},
+				
+				"orderTarget": {
+					"viewName": "Order",
+					"viewId": "vwOrder",
+					"controlAggregation": "pages",
+					"viewLevel": 1				
+				},
+				
+				"orderSummaryTarget": {
+					"viewName": "OrderSummary",
+					"viewId": "vwOrderSummary",
+					"controlAggregation": "pages",
+					"viewLevel": 1				
+				}
+			}
+		}
+	}
+}

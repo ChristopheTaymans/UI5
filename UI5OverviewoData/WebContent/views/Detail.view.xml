@@ -1,0 +1,62 @@
+<mvc:View xmlns:core="sap.ui.core" 
+          xmlns:mvc="sap.ui.core.mvc" 
+          xmlns="sap.m" 
+          xmlns:semantic="sap.m.semantic" 
+          xmlns:l="sap.ui.layout" 
+          xmlns:f="sap.ui.layout.form" 
+          xmlns:html="http://www.w3.org/1999/xhtml" 
+          controllerName="ui5.overview.oData.controllers.Detail">
+	<semantic:DetailPage title="{i18n>DETAIL_TITLE}" 
+	                     showNavButton="{Info>/backButton}" 
+	                     navButtonPress="onNavButton" 
+	                     class="MasterButton">
+		<semantic:customHeaderContent>
+			<Button icon="sap-icon://full-screen" 
+			        tooltip="{i18n>fullscreentip}" 
+			        press="_goToFullScreen" 
+			        visible="{= !${Info>/backButton} }"/>
+		</semantic:customHeaderContent>
+		<semantic:content>
+			<ObjectHeader responsive="false" 
+			              title="{Name}" 
+			              numberUnit="EUR" 
+			              number="{ path: 'Price', 
+			                        type: 'sap.ui.model.type.Float', 
+			                        formatOptions: { groupingEnabled: true, 
+			                                         decimals: 2, 
+			                                         groupingSeparator : '.', 
+			                                         decimalSeparator : ',' } 
+			                       }">
+				<attributes>
+					<ObjectAttribute title="{i18n>ProductId}" 
+					                 text="{Productid}"/>
+					<ObjectAttribute title="{i18n>Supplier}" 
+									 text="{SupplierName}"/>
+					<ObjectAttribute title="{i18n>Dimension}" 
+					                 text="{Width} x {Depth} x {Height} {DimUnit}"/>
+				</attributes>
+				<statuses>
+					<ObjectStatus text="{i18n>Weight} : {WeightMeasure} {WeightUnit}" 
+					              state="{ parts: [ {path: 'WeightMeasure'}, {path: 'WeightUnit'} ],
+					                      formatter: '.weightState' }"/>
+					<ObjectStatus text="{i18n>Stock} : {Quantity}" 
+					              state="{ path : 'Quantity', 
+					                      formatter : '.stockStatus' }"/>
+				</statuses>
+			</ObjectHeader>
+			<VBox alignItems="Center">
+				<items>
+					<Image src="{ProductPicUrl}" 
+						   decorative="true" 
+						   class="sapUiSmallMargin" 
+						   width="80%"/>
+					<ObjectAttribute text="{Description}"/>
+				</items>
+			</VBox>
+		</semantic:content>
+	<semantic:customFooterContent>
+	    <Button icon="sap-icon://cart-3" 
+	            press="_onAddToCart"/>
+	</semantic:customFooterContent>
+	</semantic:DetailPage>
+</mvc:View>

@@ -1,0 +1,49 @@
+<mvc:View xmlns:core="sap.ui.core" 
+		xmlns:mvc="sap.ui.core.mvc" 
+		xmlns="sap.m"
+		controllerName="SAPDomainManage.Application.views.Master" 
+		xmlns:html="http://www.w3.org/1999/xhtml">
+		
+	<Page title="{i18n>MASTER_TITLE}">
+ 			<subHeader>
+				<Toolbar>
+					<SearchField
+					    id="searchDomain"
+						liveChange="onDomainSearch"
+						width="100%"
+						showSearchButton="false" />
+					<ToolbarSpacer />	
+					<Button id="create" text="Create" press="handleCreatePress" icon="sap-icon://add"/>           		
+				</Toolbar>
+			</subHeader>
+			<content>	
+             	
+				<List	id="lstDomain"
+						items="{
+							path: '/DomainSet',
+							sorter: [
+								{
+									path: 'ShortDesc',
+									descending: false						
+								}
+							]
+						}" 
+						busyIndicatorDelay="10"
+						mode="SingleSelectMaster"
+						growing="true"
+						growingThreshold="20"
+						growingScrollToLoad="true"
+						updateFinished="_onUpdateFinished"
+						itemPress="_onItemPress"
+						>
+					<items>
+						<ObjectListItem
+						    	title="{ShortDesc}"						
+								intro="{Dname}"
+								type="Navigation">		
+						</ObjectListItem>						
+					</items>					
+				</List>
+			</content>
+	</Page>
+</mvc:View>

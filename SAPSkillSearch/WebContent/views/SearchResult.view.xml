@@ -1,0 +1,63 @@
+<mvc:View xmlns:core="sap.ui.core" 
+		xmlns:mvc="sap.ui.core.mvc" 
+		xmlns="sap.m"
+		controllerName="SAPSkillsSearch.Application.views.SearchResult" 
+		xmlns:html="http://www.w3.org/1999/xhtml"
+		displayBlock="true"
+		height="100%">
+		
+	<Page title="{i18n>SEARCH_RESULT}"
+		  showNavButton="true"
+		  navButtonPress="_onNavButton">
+		<content>				
+			<Table 	id="SearchResult" 
+					items="{
+ 								path: 'SearchResult>/', 
+								sorter: [ 
+ 									{ 
+ 										path: 'SkillCnt', 
+										descending: true						 
+									}, 
+									{
+										path: 'Levexp', 
+										descending: true						 
+									} 
+ 								] 
+ 							}"
+ 					itemPress="_onItemPress"
+ 					mode="SingleSelectMaster">   
+	       		<columns>  
+		           	<Column >  
+		                <Text text="{i18n>EMPLOYEE}" />  
+		      		</Column>   
+		          	<Column >  
+		                <Text text="{i18n>SKILL_COUNT}" />  
+		      		</Column>  
+		      		<Column >  
+		                <Text text="{i18n>LEVEXP}" />  
+		      		</Column>		      		
+	      		</columns>  
+	            <items>  
+	            <ColumnListItem vAlign="Middle"
+	            type="Active">
+					<ObjectIdentifier
+						title="{SearchResult>Lnam}" 
+						text="{SearchResult>Bname}" 
+						/>
+
+					<ObjectNumber
+						number="{SearchResult>SkillCnt}"
+						unit="{i18n>SKILL}"	/>						
+						
+					<RatingIndicator enabled = "false"
+	                                 maxValue="5" 
+								     class="sapUiSmallMarginBottom" 
+								     value="{ path: 'SearchResult>Levexp', 								              
+		                                     formatter: '.returnFloat'
+								            }"/>	
+					</ColumnListItem>
+	            </items>  
+	    	</Table> 		
+		</content>
+	</Page>
+</mvc:View>

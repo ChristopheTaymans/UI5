@@ -1,0 +1,25 @@
+<mvc:View
+        xmlns:core="sap.ui.core" 
+		xmlns:mvc="sap.ui.core.mvc" 
+		xmlns="sap.m"
+	    xmlns:l="sap.ui.layout"
+		xmlns:f="sap.ui.layout.form"	
+		controllerName="SAPNotification.Application.controllers.Detail" 
+		xmlns:html="http://www.w3.org/1999/xhtml">
+
+<Page id="page" 
+	  title="{i18n>DETAIL_TITLE}"
+	  showNavButton="{DEVICE>/system/phone}"
+	  navButtonPress="onNavButtonPress"
+	  class="MasterButton">
+		<content>
+		</content>
+		<footer>
+			<Toolbar>
+				<ToolbarSpacer/>
+				<Button id="save" text="Save" type="Save" press="onSave" />		
+				<Button id="cancel" text="Cancel"  press="onCancel" />		
+			</Toolbar>
+		</footer>
+	</Page>
+</mvc:View>

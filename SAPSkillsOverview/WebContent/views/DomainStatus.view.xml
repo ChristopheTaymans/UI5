@@ -1,0 +1,32 @@
+<core:View
+        xmlns:core="sap.ui.core" 
+		xmlns:mvc="sap.ui.core.mvc" 
+		xmlns="sap.m"
+	    xmlns:l="sap.ui.layout"
+		controllerName="SAPSkillsOverview.Application.views.DomainStatus" 
+		xmlns:html="http://www.w3.org/1999/xhtml">
+	<Page id="page" title="{i18n>DOMAIN_LIST}" titleLevel="H2">
+		<content>
+			<l:Grid	hSpacing="2">		
+				<HBox alignItems="Start">
+					<items>			
+        				<ObjectHeader title="{i18n>TEAM}: {Info>/Team}"/>    
+       				</items>
+              		<layoutData>
+						<l:GridData	span="L9 M8 S12" />
+					</layoutData>
+        		</HBox >   
+        		<HBox	alignItems="Center"
+						justifyContent="End">			 
+					<items>		
+       					<Label text="Mode: " design="Bold" class="sapUiSmallMarginEnd"/>  
+            			<Switch state="true" customTextOn="Tile" customTextOff="Grid" change="onSwitch"/>	
+       				</items>
+       				<layoutData>
+					<l:GridData span="L3 M4 S12" />
+					</layoutData>
+        		</HBox >
+    		</l:Grid>
+ 		</content> 
+	</Page>
+</core:View>

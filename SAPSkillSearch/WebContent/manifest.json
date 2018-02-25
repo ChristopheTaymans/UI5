@@ -1,0 +1,155 @@
+{
+	"_version": "0.1.0",
+	"sap.app": {
+		"_version": "0.1.0",
+		"id": "SAPSkillsSearch.Application.Component",
+		"type": "application",
+		"i18n": "i18n/i18n.properties",
+		"title": "{{APP_TITLE}}",
+		"description": "{{APP_DESCRIPTION}}",
+		"applicationVersion": {
+			"version": "1.0.0"
+		},
+		"dataSources": {
+			"Skills": {
+				"uri": "/sap/opu/odata/sap/Z_ESS_SKILLS_ODATA_PROVIDER_SRV",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			}
+		}
+	},
+	"sap.ui": {
+		"_version": "0.1.0",
+		"technology": "UI5",
+
+		"deviceTypes": {
+			"desktop": true,
+			"tablet": true,
+			"phone": true
+		},
+		"supportedThemes": [
+			"sap_bluecrystal"
+		]
+	},
+	"sap.ui5": {
+		"_version": "0.1.0",
+		"rootView": {
+			"viewName": "SAPSkillsSearch.Application.views.Main",
+			"type": "XML",
+			"id": "vwMain"
+		},
+		"resources": {},
+		"dependencies": {
+			"minUI5Version": "1.30.0",
+			"libs": {
+				"sap.ui.core": {},
+				"sap.m": {},
+				"sap.ui.layout": {}
+			}
+		},
+		"contentDensities": {
+			"compact": true,
+			"cozy": true
+		},
+		"models": {
+			"": {
+				"dataSource": "Skills",
+				"settings": {
+					"json": true,
+					"useBatch": false,
+					"tokenHandling": false,
+					"defaultBindingMode":"TwoWay"
+				}
+			},
+			"i18n": {
+				"type": "sap.ui.model.resource.ResourceModel",
+				"settings": {
+					"bundleName": "SAPSkillsSearch.Application.i18n.i18n"
+				}
+			}
+		},
+		"routing": {
+			"config": {
+				"routerClass": "sap.m.routing.Router",
+				"viewType": "XML",
+				"viewPath": "SAPSkillsSearch.Application.views",
+				"controlId": "AppControl",
+				"controlAggregation": "pages",
+				"transition":"flip",
+                "bypassed": {
+                	"target": [ 
+                    	"skillList",
+                	    "skillSearch"      	
+	                ]
+	          	}
+			},
+			"routes": [
+			{
+				"pattern": "",
+				"name": "initialRoute",
+				"target": [	
+				     "skillSearch",
+			    	 "skillList"		    				    
+				    ]
+			}, {
+				"pattern": "search/:Skill:",
+				"name": "searchRoute",
+				"target": [	
+				    "skillList",
+			    	"skillSearch"		    	 			    
+				    ]
+            }, {
+				"pattern": "result/:Skill:",
+				"name": "resultRoute",			
+				"target": [	
+				    "skillList",
+			    	"searchResult"		    	 			    
+				    ]	
+            }, {
+				"pattern": "developerDetail/{Developer}",
+				"name": "developerRoute",			
+				"target": "developerDetail"
+            }           
+            
+            ],
+			"targets": {
+				"splitContainer": {
+					"viewName": "SplitContainer",
+					"viewLevel": 1				
+				},
+				"skillList": {		
+				    "parent": "splitContainer",
+				    "controlId": "SplitControl",
+					"viewName": "SkillList",
+					"viewId": "vwSkillList",
+					"controlAggregation": "masterPages",
+					"viewLevel": 1
+				},
+				"skillSearch": {
+				    "parent": "splitContainer",
+				    "controlId": "SplitControl",
+					"viewName": "SkillSearch",
+					"viewId": "vwSkillSearch",
+					"controlAggregation": "detailPages",
+					"viewLevel": 2				
+				},
+				"searchResult": {
+					"parent": "splitContainer",
+				    "controlId": "SplitControl",
+				    "viewName": "SearchResult",
+					"viewId": "vwSearchResult",	
+					"controlAggregation": "detailPages",
+					"viewLevel": 2			
+				},
+				"developerDetail": {
+				    "viewName": "DeveloperDetail",
+					"viewId": "vwDeveloperDetail",	
+					"controlAggregation": "pages",
+					"viewLevel": 2			
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,50 @@
+<mvc:View xmlns:core="sap.ui.core" 
+		xmlns:mvc="sap.ui.core.mvc" 
+		xmlns="sap.m"
+		controllerName="SAPSkillsSearch.Application.views.SkillList" 
+		xmlns:html="http://www.w3.org/1999/xhtml"
+		displayBlock="true"
+		height="100%">
+		
+	<Page title="{i18n>SKILL_LIST}">
+		 <subHeader>
+				<Toolbar>
+					<SearchField
+					    id="searchSkill"
+						liveChange="onSkillSearch"
+						width="100%"
+						showSearchButton="false" />
+					<ToolbarSpacer />	            		
+				</Toolbar>
+			</subHeader>
+			<content>	
+             	
+				<List	id="lstSkill"
+						items="{
+							path: '/SkillSet',
+							sorter: [
+								{
+									path: 'ShortDesc',
+									descending: false						
+								}
+							]
+						}" 
+						busyIndicatorDelay="1"						
+						mode="SingleSelectMaster"
+						growing="true"
+						growingThreshold="20"
+						growingScrollToLoad="true"
+						updateFinished="_onUpdateFinished"
+						itemPress="_onItemPress"
+						>
+					<items>
+						<ObjectListItem
+						    	title="{ShortDesc}"						
+								intro="{Sname}"
+								type="Navigation">		
+						</ObjectListItem>						
+					</items>					
+				</List>
+			</content>
+		</Page>
+</mvc:View>

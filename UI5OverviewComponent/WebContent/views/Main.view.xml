@@ -1,0 +1,16 @@
+<mvc:View    
+    controllerName="ui5.overview.simplest.controllers.Main"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns="sap.m">
+	<App>
+	    <pages>
+	        <Page title="Simplest Component">
+		         <content>			
+		         	 <Text text="Hello UI5 World" />
+				</content>
+			</Page>	
+		</pages>	
+   </App>	
+</mvc:View>
+

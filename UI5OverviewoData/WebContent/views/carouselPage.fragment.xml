@@ -1,0 +1,44 @@
+<core:FragmentDefinition xmlns:core='sap.ui.core'>
+	<l:Grid xmlns:core="sap.ui.core" 
+	        xmlns:mvc="sap.ui.core.mvc" 
+	        xmlns:semantic="sap.m.semantic" 
+	        xmlns:html="http://www.w3.org/1999/xhtml"
+	    	xmlns:l="sap.ui.layout" 
+	    	defaultSpan="XL12 L12 M12 S12" 		    
+		    hSpacing="10">	    
+		    
+		 	 
+		 
+		<FlexBox xmlns="sap.m">		
+				<ObjectIdentifier xmlns="sap.m" 
+				  title="{Products>Name}" titleActive='true' titlePress="onSelectProduct" class="welcomeText"/>		
+		</FlexBox>
+		
+		<FlexBox xmlns="sap.m" renderType="Bare" alignItems="Center" justifyContent="Center">
+			<Image src="{Products>ProductPicUrl}" height="250px" densityAware="false" />
+		</FlexBox>
+		<FlexBox xmlns="sap.m" renderType="Bare"
+		            alignItems="End"
+		            justifyContent="SpaceBetween"
+					>
+		<Button xmlns="sap.m" tooltip="{i18n>addToCart}" type="Emphasized" press="_onAddToCart" icon="sap-icon://cart-3">
+		  <layoutData>
+				<l:GridData span="XL2 L2 M2 S2"/>
+			</layoutData>
+		</Button>
+
+	
+		<ObjectListItem xmlns="sap.m" class="welcomePrice"
+			number="{ parts:[ {path:'Products>Price'}, {path:'Products>CurrencyCode'} ], type:'sap.ui.model.type.Currency', formatOptions:{showMeasure: false} }"
+			numberUnit="{Products>CurrencyCode}">
+			<firstStatus>
+			 <ObjectStatus text="{ path : 'Products>Quantity', formatter : '.statusText'}" state="{ path : 'Products>Quantity', formatter : '.stockStatus'}"/>
+			</firstStatus>
+			<layoutData>
+				<l:GridData span="XL10 L10 M10 S10"/>
+			</layoutData>
+		</ObjectListItem>
+		</FlexBox>
+		
+	</l:Grid>
+</core:FragmentDefinition>

@@ -1,0 +1,54 @@
+<mvc:View
+        xmlns:core="sap.ui.core" 
+		xmlns:mvc="sap.ui.core.mvc" 
+		xmlns="sap.m"
+	    xmlns:l="sap.ui.layout"
+	    xmlns:f="sap.ui.layout.form"
+		controllerName="SAPDomainManage.Application.views.Create" 
+		xmlns:html="http://www.w3.org/1999/xhtml">
+
+	<Page id="page" title="{i18n>DETAIL_TITLE}" titleLevel="H2">	
+		<content>
+		
+		<VBox class="sapUiSmallMargin" id="CreateBox">
+		<f:SimpleForm 
+			minWidth="1024"
+			maxContainerCols="2"
+			editable="true"
+			layout="ResponsiveGridLayout"
+			labelSpanL="3"
+			labelSpanM="3"
+			emptySpanL="4"
+			emptySpanM="4"
+			columnsL="1"
+			columnsM="1"
+			class="editableForm"
+			title="{i18n>DOMAIN} : {NewDomain>/Dname}" >
+			<f:content>		
+				<Label text="{i18n>DOMAIN}" required="true"/>
+				<Input id="DnameInput" 
+					   value="{NewDomain>/Dname}"
+					   maxLength = '20'/>		
+				<Label text="{i18n>DESCRIPTION}" required="true"/>
+				<Input value="{NewDomain>/ShortDesc}"
+						maxLength = '35'/>
+				<Label text="{i18n>LONG_DESCRIPTION}" />
+				<TextArea rows="5"
+						  maxLength="255"
+						  wrapping="Soft"
+				          value="{NewDomain>/LongDesc}">
+				</TextArea>	
+			</f:content>
+		</f:SimpleForm>		
+	</VBox>	
+ 		</content> 
+ 		<footer>
+			<Bar>
+				<contentRight>			
+					<Button id="save" text="Save" type="Emphasized"  press="handleSavePress" />
+					<Button id="cancel" text="Cancel"  press="handleCancelPress" />	
+				</contentRight>
+			</Bar>
+		</footer>
+	</Page>
+</mvc:View>

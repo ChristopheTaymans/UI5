@@ -1,0 +1,77 @@
+<mvc:View xmlns:core="sap.ui.core" 
+		xmlns:mvc="sap.ui.core.mvc" 
+		xmlns="sap.m"
+		controllerName="SAPNotification.Application.controllers.Master" 
+		xmlns:html="http://www.w3.org/1999/xhtml">
+		
+<Page title="{i18n>MASTER_TITLE} ({Info>/actualCount}/{Info>/totalCount})"
+      id="page"
+	  showHeader="true">	
+           <subHeader>           
+			<Toolbar id="searchBar">	
+				<SearchField
+					    id="searchDescr"
+						liveChange="onSearch"
+						width="100%"						
+						showSearchButton="false"
+						placeholder="{i18n>SEARCHDESCR}"
+						 />
+			</Toolbar>	
+			</subHeader>			
+			<content>	  
+				
+				<List	id="lst"
+						items="{
+							path: '/NotificationHeaderSet/',
+							sorter: [
+								{
+									path: 'Qmnum',
+									descending: false						
+								}
+							]
+						}" 
+						busyIndicatorDelay="10"
+						mode="SingleSelectMaster"
+						growing="true"
+						growingThreshold="20"
+						growingScrollToLoad="true"
+						itemPress="_onItemPress"
+						updateFinished="_onListUpdateFinished"
+						>
+						
+					<items>
+						<ObjectListItem	
+						     icon="{ path: 'Qmsttxt',						             
+						             formatter: '.getIcon'}" 
+							 intro = "{ path:'Qmnum',
+							 		   formatter : '.deleteZero'
+							 		  }"
+							 title="{Qmtxt}"	
+							 type="{= ${DEVICE>/system/phone} === true ? 'Navigation' : 'Active' }">	      
+							 <attributes>						           
+					 			<ObjectAttribute title = "{i18n>BEGINDATE}"
+					 							 text="{
+						        						path : 'Strmn',
+						        						type: 'sap.ui.model.type.Date',
+						        						formatOptions:{pattern: 'dd/MM/yyyy'}
+						        					}"/>					   	 
+							   	<ObjectAttribute title = "{i18n>ENDDATE}"
+							   					 text="{
+						        						path : 'Ltrmn',
+						        						type: 'sap.ui.model.type.Date',
+						        						formatOptions:{pattern: 'dd/MM/yyyy'}
+						        					}"/>		
+						   	</attributes>				
+						</ObjectListItem>						
+					</items>					
+				</List>
+			</content>
+<footer>
+			<Bar>
+				<contentRight>
+					<Button id="createButton" text="{i18n>CREATE}" press="onCreate" icon="sap-icon://add"/>					
+				</contentRight>
+			</Bar>
+		</footer>			
+		</Page>
+</mvc:View>
