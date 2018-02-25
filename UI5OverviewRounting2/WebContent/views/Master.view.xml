@@ -13,9 +13,9 @@
 					id="idProductsTable"
 					inset="false"
 					items="{
-						path: '/ProductCollection',
+						path: 'ProductSet>/ProductCollection',
 						sorter: {
-							path: 'Name'
+							path: 'ProductSet>Name'
 						}
 					}"
 					mode="SingleSelectMaster"
@@ -39,8 +39,8 @@
 					<items>
 						<ColumnListItem>
 							<cells>
-								<ObjectIdentifier title="{Name}"/>									
-								<Text text = "{ProductId}"/>									
+								<ObjectIdentifier title="{ProductSet>Name}"/>									
+								<Text text = "{ProductSet>ProductId}"/>									
 							</cells>
 						</ColumnListItem>
 					</items>

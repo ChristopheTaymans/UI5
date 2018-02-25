@@ -33,7 +33,7 @@ sap.ui.define(
                         
             _onItemPress: function(oEvent){ 
             	
-              	var oBindingContext = oEvent.getParameter("listItem").getBindingContext(); 
+              	var oBindingContext = oEvent.getParameter("listItem").getBindingContext("ProductSet"); 
               	
             	var path = encodeURIComponent(oBindingContext.sPath);   	            	
      

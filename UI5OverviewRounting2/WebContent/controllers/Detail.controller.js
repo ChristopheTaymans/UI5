@@ -67,7 +67,7 @@ sap.ui.define(
             
             onDetailRouteMatched: function(oEvent){    
             	
-                	var oModel = this.getModel();
+                	var oModel = this.getModel("ProductSet");
                 	
                 	var sParameter = oEvent.getParameter("arguments").path;     
                 	var path = decodeURIComponent(sParameter);   

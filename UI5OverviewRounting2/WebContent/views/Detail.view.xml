@@ -17,7 +17,7 @@
 		</headerContent>
 		<content>
 			<ObjectHeader responsive="false" 
-						  title="{Name}" 
+						  title="{ProductSet>/Name}" 
 						  numberUnit="EUR"
 				          number="{ path: 'Price', 
 				          			type: 'sap.ui.model.type.Float', 

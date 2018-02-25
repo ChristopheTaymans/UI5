@@ -51,7 +51,7 @@
 			"cozy": true
 		},
 		"models": {
-			"": {
+			"ProductSet": {
 				"type": "sap.ui.model.json.JSONModel",
 				"dataSource":"Data"
 			},
