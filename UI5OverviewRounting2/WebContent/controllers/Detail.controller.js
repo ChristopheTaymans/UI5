@@ -72,7 +72,7 @@ sap.ui.define(
                 	var sParameter = oEvent.getParameter("arguments").path;     
                 	var path = decodeURIComponent(sParameter);   
                     var oDetailBindingCtx = new ContextBinding(oModel, path);
-                	this.getView().setBindingContext(oDetailBindingCtx);          
+                	this.getView().setBindingContext(oDetailBindingCtx,"ProductSet");          
                 	   	
                 	
 //                	this.getView().bindElement({
