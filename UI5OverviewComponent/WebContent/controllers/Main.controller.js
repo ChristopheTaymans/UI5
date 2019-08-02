@@ -1,4 +1,4 @@
-sap.ui.controller("ui5.overview.simplest.controllers.Main", {
+sap.ui.controller("ui5.overview.dynamictoolbar.controllers.Main", {
 
 /**
 * Called when a controller is instantiated and its View controls (if available) are already created.

@@ -15,7 +15,7 @@ sap.ui.define(
 		"use strict";		
 	
 		/**
-		 * simplest Definition of the component
+		 * dynamictoolbar Definition of the component
 		 */
 		return SAPUiComponent.extend("ui5.overview.comp.model.Component", {
 			

@@ -4,7 +4,7 @@
  * @author		Christophe Taymans
  * @version		1.0.0
  * @since		1.0.0
- * @memberOf	ui5.overview.simplest
+ * @memberOf	ui5.overview.dynamictoolbar
  */
 sap.ui.define(
 	[
@@ -14,12 +14,12 @@ sap.ui.define(
 		"use strict";		
 	
 		/**
-		 * simplest Definition of the component
+		 * dynamictoolbar Definition of the component
 		 */
-		return SAPUiComponent.extend("ui5.overview.simplest.Component", {
+		return SAPUiComponent.extend("ui5.overview.dynamictoolbar.Component", {
 			
 		    metadata : {
-					rootView: "ui5.overview.simplest.views.Main"
+					rootView: "ui5.overview.dynamictoolbar.views.Main"
 				},
 			
 			init: function(){
