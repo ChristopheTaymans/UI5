@@ -19,11 +19,10 @@ sap.ui.define(
 			 * Can be used to modify the View before it is displayed, to bind event handlers and do other one-time initialization.
              * 
 			 */
-            oController.prototype.onInit= function () {     		
-	
-				this.getOwnerComponent().getModel("main").metadataLoaded().then(function(){
+            oController.prototype.onInit= function () {  
+				this.getOwnerComponent().getModel("main").metadataLoaded().then(function(){						
 					this.getModel("main").attachPropertyChange(function(oEvent){
-						this.setInfo("toSave",this.getModel("main").hasPendingChanges());
+						this.setInfo("toSave",this.getModel("main").hasPendingChanges());					
 					}.bind(this))
 				}.bind(this));		
 	

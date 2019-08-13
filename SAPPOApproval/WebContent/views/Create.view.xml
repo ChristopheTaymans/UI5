@@ -1,8 +1,7 @@
 <mvc:View xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:semantic="sap.m.semantic"
 	xmlns:footerbar="sap.ushell.ui.footerbar" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form"
 	controllerName="SAPPOApproval.Application.controllers.Create">
-	<Page  title="{i18n>DETAIL_TITLE}" 
-		class="MasterButton">
+	<Page title="{i18n>DETAIL_TITLE}" class="MasterButton">
 		<content>
 			<VBox class="sapUiSmallMargin">
 				<f:SimpleForm minWidth="1024" maxContainerCols="2" editable="false" layout="ResponsiveGridLayout"
@@ -13,12 +12,22 @@
 						<Label text="{i18n>DOCDATE}" />
 						<Input
 							value="{ path : 'main>Aedat', type: 'sap.ui.model.type.Date', formatOptions: { pattern: 'dd/MM/yyyy'} }" />
+						<Label text="Type" />
+						<Input value="{main>Bsart}" />
+						<Label text="Created By" />
+						<Input value="{main>Ernam}" />
+						<Label text="Purchase Org." />
+						<Input value="{main>Ekorg}" />
+						<Label text="Supplier" />
+						<Input value="{main>Lifnr}" />
+						<Label text="Currency" />
+						<Input value="{main>Waers}" />
 					</f:content>
 				</f:SimpleForm>
 			</VBox>
 		</content>
-					<Toolbar>
-		    	<Button text='test'  press="onTest" />				
-			</Toolbar>
+		<Toolbar>
+			<Button text='test' press="onTest" />
+		</Toolbar>
 	</Page>
 </mvc:View>

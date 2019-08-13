@@ -1,35 +1,17 @@
-<mvc:View 
-		xmlns:mvc="sap.ui.core.mvc" 
-		xmlns="sap.m"
-		controllerName="SAPPOApproval.Application.controllers.Master" 
-		xmlns:html="http://www.w3.org/1999/xhtml"
-		displayBlock="true"
-		height="100%"
-		>
-		
-<Page title="{i18n>MASTER_TITLE} ({Info>/actualCount}/{Info>/totalCount})"
-      id="page"
-	  showHeader="true">	
-           <subHeader>           
-			<Toolbar id="searchBar">	
-				<SearchField
-					    id="searchPoNumber"
-						liveChange="onPoNumberSearch"
-						width="100%"
-						showRefreshButton="true"
-						showSearchButton="false"						
-						search="handleRefresh"
-						placeholder="{i18n>SEARCHSUPPLIER}"
-						 />
-						<ToolbarSpacer />	
-					<Button id="refresh"  				
-							press="handleRefresh" 
-							icon="sap-icon://refresh"/> 
-				</Toolbar>	
-			</subHeader>			
-			<content>	  				
-				<List	id="lstPO"
-						items="{
+<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="SAPPOApproval.Application.controllers.Master"
+	xmlns:html="http://www.w3.org/1999/xhtml" displayBlock="true" height="100%">
+
+	<Page title="{i18n>MASTER_TITLE} ({Info>/actualCount}/{Info>/totalCount})" id="page" showHeader="true">
+		<subHeader>
+			<Toolbar id="searchBar">
+				<SearchField id="searchPoNumber" width="100%" showRefreshButton="true" showSearchButton="false"
+					search="onPoNumberSearch" placeholder="Search Id..." />
+				<SearchField id="searchlifnr" width="100%" showRefreshButton="true" showSearchButton="false"
+					search="onLifnrSearch" placeholder="Search supplier..." />
+			</Toolbar>
+		</subHeader>
+		<content>
+			<List id="lstPO" items="{
 							path: 'main>/HeaderSet',
 							sorter: [
 								{
@@ -37,19 +19,10 @@
 									descending: false						
 								}
 							]
-						}" 
-						busyIndicatorDelay="10"
-						mode="SingleSelectMaster"
-						growing="true"
-						growingThreshold="20"
-						growingScrollToLoad="true"
-						itemPress="_onItemPress"
-						updateFinished="_onListUpdateFinished"
-						>						
-					<items>
-						<ObjectListItem	
-							 intro = "{main>Ebeln}"							 				
-							 number="{
+						}" busyIndicatorDelay="10" mode="SingleSelectMaster" growing="true" growingThreshold="20"
+				growingScrollToLoad="true" itemPress="_onItemPress" updateFinished="_onListUpdateFinished">
+				<items>
+					<ObjectListItem intro="Id : {main>Ebeln}" title="Supplier : {main>Lifnr}" number="{
 								path: 'main>Netwr',
 								type: 'sap.ui.model.type.Float',  
 		   						formatOptions: {  
@@ -58,25 +31,26 @@
 		   							groupingSeparator : '.',
 		   							decimalSeparator : ','
 		   						}
-						     }"		
-							 numberUnit="{main>Waers}"
-							 type="{= ${DEVICE>/system/phone} === true ? 'Navigation' : 'Active' }">	      
-							 <attributes>						           
-					 			<ObjectAttribute text="{
+						     }" numberUnit="{main>Waers}" type="{= ${DEVICE>/system/phone} === true ? 'Navigation' : 'Active' }">
+						<attributes>
+							<ObjectAttribute text="{
 			        						path : 'main>Aedat',
 			        						type: 'sap.ui.model.type.Date',
 			        						formatOptions:{pattern: 'dd/MM/yyyy'}
-			        					}"/>					   	 
-							  	 </attributes>	
-						</ObjectListItem>						
-					</items>					
-				</List>
-			</content>
-					<footer>
-			<Toolbar>
-		    	<Button text='Create' icon="sap-icon://create"  press="onCreate" />
-				<Button text='Save' icon="sap-icon://save" type="Emphasized" visible="{Info>/toSave}" press="onSave" />
-			</Toolbar>
+			        					}" />
+						</attributes>
+					</ObjectListItem>
+				</items>
+			</List>
+		</content>
+		<footer>
+			<OverflowToolbar id="otbFooter">
+				<Button icon="sap-icon://alert" text="{=${message>/}.length}" visible="{=${message>/}.length > 0}"
+					type="Emphasized" press="onMessagePopoverPress" />
+				<ToolbarSpacer />
+				<Button text='Create' icon="sap-icon://create" visible="{= !${Info>/createMode} }" press="onCreate" />
+				<Button text='Save' icon="sap-icon://save" type="Emphasized" visible="{Info>/toSave}" press="onSave" />			
+			</OverflowToolbar>
 		</footer>
-		</Page>
+	</Page>
 </mvc:View>

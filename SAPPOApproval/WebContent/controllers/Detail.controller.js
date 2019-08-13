@@ -44,8 +44,17 @@ sap.ui.define(
 				var sParameter = oEvent.getParameter("arguments").path;
 				var sBindingPath = '/' + sParameter;
 				var oDetailBindingCtx = new ContextBinding(oModel, sBindingPath);
-				this.getView().setBindingContext(oDetailBindingCtx, "main");						
-			}
+				this.getView().setBindingContext(oDetailBindingCtx, "main");
+			},
+
+			onDelete: function () {
+var oModel = this.getModel("main");		
+				oModel.remove(this.getView().getBindingContext("main").getPath(), {
+					groupId: "changes"
+				});
+				this.setInfo("toSave",true);
+				this.getRouter().navTo("initialRoute");
+			},
 		});
 	}
 );
