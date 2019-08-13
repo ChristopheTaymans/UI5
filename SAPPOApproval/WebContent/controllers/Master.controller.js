@@ -72,7 +72,6 @@ sap.ui.define(
 			},
 
 			onCreate: function () {
-
 				var oContext = this.getModel("main").createEntry("/HeaderSet");
 				this.setInfo("toSave", true);
 				this.getRouter().navTo(
@@ -80,11 +79,7 @@ sap.ui.define(
 						path: encodeURI(oContext.getPath().slice(1))
 					}
 				)
-
-
 			},
-
-
 			/**
 			 * Similar to onAfterRendering, but this hook is invoked before the controller's View is re-rendered
 			 * (NOT before the first rendering! onInit() is used for that one!).
