@@ -19,7 +19,7 @@
 			<ObjectHeader responsive="false" 
 						  title="{ProductSet>/Name}" 
 						  numberUnit="EUR"
-				          number="{ path: 'Price', 
+				          number="{ path: 'ProductSet>Price', 
 				          			type: 'sap.ui.model.type.Float', 
 				          			formatOptions: { groupingEnabled: true, 
 				          							 decimals: 2, 
@@ -27,25 +27,25 @@
 				          							 decimalSeparator : ',' } 
 				          			}">
 				<attributes>
-					<ObjectAttribute title="{i18n>ProductId}" text="{ProductId}"/>
-					<ObjectAttribute title="{i18n>Supplier}" text="{SupplierName}"/>
-					<ObjectAttribute title="{i18n>Dimension}" text="{Width} x {Depth} x {Height} {DimUnit}"/>
+					<ObjectAttribute title="{i18n>ProductId}" text="{ProductSet>ProductId}"/>
+					<ObjectAttribute title="{i18n>Supplier}" text="{ProductSet>SupplierName}"/>
+					<ObjectAttribute title="{i18n>Dimension}" text="{ProductSet>Width} x {ProductSet>Depth} x {ProductSet>Height} {ProductSet>DimUnit}"/>
 				</attributes>
 				
 				<statuses>
-					<ObjectStatus text="{i18n>Weight} : {WeightMeasure} {WeightUnit}"
-						          state="{ parts: [ {path: 'WeightMeasure'}, {path: 'WeightUnit'} ], formatter: '.weightState' }"/>
-					<ObjectStatus text="{i18n>Stock} : {Quantity}" state="{ path : 'Quantity', formatter : '.stockStatus' }"/>
+					<ObjectStatus text="{i18n>Weight} : {ProductSet>WeightMeasure} {ProductSet>WeightUnit}"
+						          state="{ parts: [ {path: 'ProductSet>WeightMeasure'}, {path: 'ProductSet>WeightUnit'} ], formatter: '.weightState' }"/>
+					<ObjectStatus text="{i18n>Stock} : {ProductSet>Quantity}" state="{ path : 'ProductSet>Quantity', formatter : '.stockStatus' }"/>
 				</statuses>
   			</ObjectHeader>
 			<VBox alignItems="Center">
 				<items>
 					<Image id="productImage" 
-						   src="{ProductPicUrl}" 
+						   src="{ProductSet>ProductPicUrl}" 
 						   decorative="true" 
 						   class="sapUiSmallMargin" 
 						   width="100%"/>
-					<ObjectAttribute text="{Description}"/>
+					<ObjectAttribute text="{ProductSet>Description}"/>
 				</items>
 			</VBox>
 		</content>
