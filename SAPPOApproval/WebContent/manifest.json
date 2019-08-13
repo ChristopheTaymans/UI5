@@ -12,7 +12,7 @@
 		},
 		"dataSources": {
 			"oData": {
-				"uri": "proxy/http/sapfid.msnet.railb.be:8002/sap/opu/odata/sap/Z_IM2_PO_APPROVAL_ODATA_SRV",
+				"uri": "http://psadc-hanadb3.sap.soapeople.com:55100/sap/opu/odata/sap/ZABAP_COURSE_ODATA_SRV_SRV/",
 				"type": "OData",
 				"settings": {
 					"odataVersion": "2.0"
@@ -54,12 +54,11 @@
 			"cozy": true
 		},
 		"models": {
-			"": {
+			"main": {
 				"dataSource": "oData",
 				"settings": {
 					"json": true,
-					"useBatch": false,
-					"tokenHandling": true,	
+					"useBatch": true,	
 					"defaultBindingMode":"TwoWay"
 				}
 			},
@@ -98,6 +97,12 @@
 				"target": [	"masterTarget"	,	
 			    	        "detailTarget"			    	 		    	 			    
 				    ]
+            }, {
+				"pattern": "new/{path}",
+				"name": "createRoute",
+				"target": [	"masterTarget"	,	
+			    	        "createTarget"			    	 		    	 			    
+				    ]
             },
             {
 				"pattern": "success/{PoId}",
@@ -130,7 +135,14 @@
 					"controlAggregation": "detailPages",
 					"viewLevel": 2				
 				},
-				
+				"createTarget": {
+				    "parent": "splitContainer",
+				    "controlId": "SplitControl",
+					"viewName": "Create",
+					"viewId": "vwCreate",
+					"controlAggregation": "detailPages",
+					"viewLevel": 2				
+				},
 				"noData": {
 					"parent": "splitContainer",
 				    "controlId": "SplitControl",

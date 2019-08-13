@@ -45,7 +45,15 @@ sap.ui.define([
 			},
 			
     		setBusy:function(bState){
-    			this.getView().setBusy(bState);
+    			this.setInfo("busy",bState);
+			},
+			
+			setInfo:function(sProperty,sValue){
+    			this.getModel("Info").setProperty("/"+sProperty,sValue);
+			},
+			
+			getInfo:function(sProperty){
+    			return this.getModel("Info").getProperty("/"+sProperty);
     		}
 
 		});

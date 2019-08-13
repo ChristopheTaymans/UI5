@@ -6,6 +6,6 @@
 		displayBlock="true"
 		height="100%">
 	<NavContainer id="AppControl" 
-			      busy="{appView>/busy}"
-		          busyIndicatorDelay="{appView>/delay}"/>
+			      busy="{Info>/busy}"
+		          busyIndicatorDelay="0"/>
 </mvc:View>

@@ -12,9 +12,10 @@ sap.ui.define(
     [   "SAPPOApproval/Application/controllers/BaseController",
         "sap/ui/model/json/JSONModel",
         'sap/ui/model/Filter',
-        "sap/ui/Device"
+		"sap/ui/Device",
+		"sap/m/MessageToast",
     ],
-    function (BaseController,SAPJsonModel, Filter,Device) {
+    function (BaseController,SAPJsonModel, Filter,Device,MessageToast) {
         "use strict";
        
         return BaseController.extend("SAPPOApproval.Application.controllers.Master", {
@@ -32,7 +33,35 @@ sap.ui.define(
     				var page = this.getView().byId("page");
     				page.insertAggregation("content", bar, 1);
     			}
-            },
+			},
+			
+			
+			onSave: function () {
+				this.setBusy(true);
+				this.getModel("main").submitChanges({
+					success: function (oData) {
+						MessageToast.show("Saved...");
+						this.setBusy(false);
+						this.setInfo("toSave", false);
+					}.bind(this),
+					error: function (oError) {
+						this.setBusy(false);
+					}.bind(this)
+				});
+			},
+
+			onCreate: function () {
+				
+				var oContext = this.getModel("main").createEntry("/HeaderSet");
+				this.setInfo("toSave",true);	
+				this.getRouter().navTo(
+					"createRoute", {
+						path:encodeURI(oContext.getPath().slice(1))
+					}
+			) 
+
+	
+			},
             
 
             /**
@@ -57,12 +86,12 @@ sap.ui.define(
 			 */		
             onExit: function () { },            
             
-            onSupplierSearch : function (oEvt) {       
+            onPoNumberSearch : function (oEvt) {       
     			// add filter for search
     			var aFilters = [];
     			var sQuery = oEvt.getSource().getValue();
     			if (sQuery && sQuery.length > 0) {
-    				var filter = new Filter("Name1", sap.ui.model.FilterOperator.Contains, sQuery);
+    				var filter = new Filter("Ebeln", sap.ui.model.FilterOperator.Contains, sQuery);
     				aFilters.push(filter);
     			};
     			// update list binding
@@ -77,57 +106,27 @@ sap.ui.define(
             },
             
             onInitialRouteMatched:function(oEvent) {            	
-            	if ( this.getOwnerComponent().InitialLoaded != true )
-            		{ this._loadData() };  
-            },
-            
-            _loadData:function(){
-            	var oModel = this.getModel();
-            	var oViewModel = new SAPJsonModel();  
-            	this.setBusy(true);            	
-            	this.getOwnerComponent().InitialLoaded = true ;         	
-            	oModel.read( "/POInfoSet",{                		
-            		async: true,
-            		success: function(oData, oResponse){   
-            			this.getView().byId("pullToRefresh").hide();
-            			this.setBusy(false);
-            			oViewModel.setData(oData.results); 
-            			this.setModel(oViewModel,"WI");	            	 
-        			
-                 	}.bind(this),                 	
-            		error: function(oError){  
-            			this.setBusy(false);
-            		}
-               });
-            },
+        
+            },                    
                         
             onSuccessRouteMatched:function(oEvent){              	
                 if (this.getOwnerComponent().InitialLoaded != true ){
                	 this.getRouter().navTo("initialRoute");
                	 return;
-               	}
-	            var oModel = this.getModel('WI');           
-		        var sPoId = oEvent.getParameter("arguments").PoId;     
-		        var sIndex = oModel.oData.findIndex(function(currentValue,index,arr){        		
-		        	return currentValue.Ebeln == sPoId;
-		        },this);   		        	
-		        oModel.oData.splice(sIndex,1);
-		        oModel.setData(oModel.oData);    
+               	}	            
             },
            	            				  
             _onItemPress : function(oEvent){  
-            	var sPath = oEvent.getParameter("listItem").getBindingContext("WI").getPath();  
-            	var oPo = this.getModel('WI').getProperty(sPath);
-            	sPath = "/POInfoSet('" + oPo.Ebeln + "')";
+            	var sPath = oEvent.getParameter("listItem").getBindingContext("main").getPath().slice(1);  
 	            this.getRouter().navTo(
 	            		"detailRoute", {
-	            			path:sPath.substr(1)
+	            			path:encodeURI(sPath)
 	            		}
 	            ) 
             },
             
             handleRefresh:function(){
-            	this._loadData();
+            	this.getModel("main").refresh();
             }
         });
     }

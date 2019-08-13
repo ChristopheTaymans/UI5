@@ -33,7 +33,10 @@ sap.ui.define(
 				
 				// initialize the error handler with the component
 				this._oErrorHandler = new ErrorHandler(this);
-				this.setModel(new SAPJsonModel(),"Info");				
+				this.setModel(new SAPJsonModel({
+					busy : false,
+					toSave:false
+				}),"Info");				
 				this.InitialLoaded = false;
 				
                 var oDeviceModel = new SAPJsonModel(SAPDevice);
@@ -73,6 +76,6 @@ sap.ui.define(
 			
 			
 		});
-		
+		return oCmp;
 	}
 );

@@ -13,8 +13,8 @@
            <subHeader>           
 			<Toolbar id="searchBar">	
 				<SearchField
-					    id="searchSupplier"
-						liveChange="onSupplierSearch"
+					    id="searchPoNumber"
+						liveChange="onPoNumberSearch"
 						width="100%"
 						showRefreshButton="true"
 						showSearchButton="false"						
@@ -22,21 +22,15 @@
 						placeholder="{i18n>SEARCHSUPPLIER}"
 						 />
 						<ToolbarSpacer />	
-					<Button id="refresh"  
-					        visible="{= ${DEVICE>/support/touch} === true ? false : true  }"
+					<Button id="refresh"  				
 							press="handleRefresh" 
 							icon="sap-icon://refresh"/> 
 				</Toolbar>	
-			</subHeader>
-			
-			<content>	  
-          	<PullToRefresh id="pullToRefresh"
-				visible="{DEVICE>/support/touch}"
-				refresh="handleRefresh" /> 	
-				
+			</subHeader>			
+			<content>	  				
 				<List	id="lstPO"
 						items="{
-							path: 'WI>/',
+							path: 'main>/HeaderSet',
 							sorter: [
 								{
 									path: 'Ebeln',
@@ -51,14 +45,12 @@
 						growingScrollToLoad="true"
 						itemPress="_onItemPress"
 						updateFinished="_onListUpdateFinished"
-						>
-						
+						>						
 					<items>
 						<ObjectListItem	
-							 intro = "{WI>Ebeln}"
-							 title="{WI>Name1}"					
+							 intro = "{main>Ebeln}"							 				
 							 number="{
-								path: 'WI>Netwr',
+								path: 'main>Netwr',
 								type: 'sap.ui.model.type.Float',  
 		   						formatOptions: {  
 		   							groupingEnabled: true,
@@ -67,23 +59,24 @@
 		   							decimalSeparator : ','
 		   						}
 						     }"		
-							 numberUnit="{WI>Waers}"
+							 numberUnit="{main>Waers}"
 							 type="{= ${DEVICE>/system/phone} === true ? 'Navigation' : 'Active' }">	      
 							 <attributes>						           
-					 			<ObjectAttribute text = "{WI>ItemNbr} items(s)"/>					   	 
-							   	<ObjectAttribute title = "{i18n>REQUESTER}"
-							   					 text = "{WI>TitleP} {WI>Fullname}"/>		
-						   	</attributes>	
-						   	<firstStatus>
-				                <ObjectStatus text="{
-			        						path : 'WI>Aedat',
+					 			<ObjectAttribute text="{
+			        						path : 'main>Aedat',
 			        						type: 'sap.ui.model.type.Date',
 			        						formatOptions:{pattern: 'dd/MM/yyyy'}
-			        					}" />
-				            </firstStatus> 
+			        					}"/>					   	 
+							  	 </attributes>	
 						</ObjectListItem>						
 					</items>					
 				</List>
 			</content>
+					<footer>
+			<Toolbar>
+		    	<Button text='Create' icon="sap-icon://create"  press="onCreate" />
+				<Button text='Save' icon="sap-icon://save" type="Emphasized" visible="{Info>/toSave}" press="onSave" />
+			</Toolbar>
+		</footer>
 		</Page>
 </mvc:View>
